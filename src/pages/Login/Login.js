@@ -5,9 +5,15 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { dangNhapAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import { history } from '../../App';
+import { useTranslation } from 'react-i18next';
 
 
 export default function Login(props) {
+    const { t, i18n } = useTranslation();
+
+    const handleChange = (value) => {
+        i18n.changeLanguage(value);
+    }
 
     const dispatch = useDispatch();
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
@@ -48,35 +54,35 @@ export default function Login(props) {
             </div>
             <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
                 <h2 className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl
-              xl:text-bold">Log in</h2>
+              xl:text-bold">{t('login')}</h2>
                 <div className="mt-12">
                     <div>
                         <div>
-                            <div className="text-sm font-bold text-gray-700 tracking-wide">Username</div>
-                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder="Enter your username form-control" name="taiKhoan" onChange={formik.handleChange} />
+                            <div className="text-sm font-bold text-gray-700 tracking-wide">{t('username')}</div>
+                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder={`${t('enterusername')}`} name="taiKhoan" onChange={formik.handleChange} />
                         </div>
                         <div className="mt-8">
                             <div className="flex justify-between items-center">
                                 <div className="text-sm font-bold text-gray-700 tracking-wide">
-                                    Password
+                                    {t('password')}
                                 </div>
                                 <div>
                                     <a className="text-xs font-display font-semibold text-indigo-600 hover:text-indigo-800
                                   cursor-pointer">
-                                        Forgot Password?
+                                        {t('forgotpassword')}
                                     </a>
                                 </div>
                             </div>
-                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500 form-control" type="password" placeholder="Enter your password" name="matKhau" onChange={formik.handleChange} />
+                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="password" placeholder={`${t('enterpassword')}`} name="matKhau" onChange={formik.handleChange} />
                         </div>
                         <div className="mt-10">
                             <button className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg" type="submit">
-                                Log In
+                                {t('forgotpassword')}
                             </button>
                         </div>
                     </div>
                     <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-                        Don't have an account ? <NavLink to="/register" className="cursor-pointer text-indigo-600 hover:text-indigo-800">Sign up</NavLink>
+                        {t('noaccount')} <NavLink to="/register" className="cursor-pointer text-indigo-600 hover:text-indigo-800">{t('signup')}?</NavLink>
                     </div>
                 </div>
             </div>

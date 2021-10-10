@@ -2,8 +2,15 @@ import React from 'react';
 import { AppleOutlined, FacebookOutlined } from '@ant-design/icons';
 import _ from 'lodash';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 
 export default function Footer(props) {
+    const { t, i18n } = useTranslation();
+
+    const handleChange = (value) => {
+        i18n.changeLanguage(value);
+    }
 
     const { heThongRapChieu } = useSelector(state => state.QuanLyRapReducer);
 
@@ -22,7 +29,7 @@ export default function Footer(props) {
                         </a>
                     </div>
                     <div className="col-span-6 text-center md:text-left md:col-span-3 text-white">
-                        <p className="pb-1 text-lg font-medium">PARTNER</p>
+                        <p className="pb-1 text-lg font-medium">{t('partner')}</p>
                         <div className="grid grid-cols-3">
                             {arrHeThongRap.map((htr, index) => {
                                 return <div key={index}>
@@ -32,7 +39,7 @@ export default function Footer(props) {
                         </div>
                     </div>
                     <div className="col-span-6 text-center md:text-left md:col-span-3 text-white">
-                        <p className="pb-1 text-lg font-medium">Mobile App</p>
+                        <p className="pb-1 text-lg font-medium">{t('app')}</p>
                         <div style={{ display: 'flex' }}>
                             <AppleOutlined style={{ fontSize: '30px', cursor: 'pointer' }} className="mr-5" />
                             <FacebookOutlined style={{ fontSize: '30px', cursor: 'pointer' }} />
@@ -41,7 +48,7 @@ export default function Footer(props) {
                 </div>
                 <div className="grid justify-center pt-6 lg:justify-between text-white">
                     <div className="flex flex-col self-center text-sm text-center md:block lg:col-start-1 md:space-x-6">
-                        <span>©2021 All rights reserved</span>
+                        <span>©2021 {t('copyright')}</span>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,10 @@ import 'antd/dist/antd.css';
 //react-slick
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import {DOMAIN} from './util/settings/config';
 
+//Import đa ngôn ngữ
+import './i18n';
 
 ReactDOM.render(
   <Provider store={store}>

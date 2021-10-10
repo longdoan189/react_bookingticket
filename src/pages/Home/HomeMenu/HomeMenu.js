@@ -3,10 +3,17 @@ import { Tabs, Radio, Space } from 'antd';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
+import { useTranslation } from 'react-i18next';
+
 
 const { TabPane } = Tabs;
 
 export default function HomeMenu(props) {
+    const { t, i18n } = useTranslation();
+
+    const handleChange = (value) => {
+        i18n.changeLanguage(value);
+    }
 
     useEffect(() => {
         console.log('heThongRapChieu', props);
@@ -31,7 +38,7 @@ export default function HomeMenu(props) {
                                 <img src="https://s3img.vcdn.vn/123phim/2018/10/lotte-cinema-nam-sai-gon-15383867312967.jpg" width={50} />
                                 <div className="text-left ml-2">
                                     {cumRap.tenCumRap}
-                                    <p className="text-blue-600">Chi tiết</p>
+                                    <p className="text-blue-600">{t('detail')}</p>
                                 </div>
                             </div>
                         } key={index}>
@@ -46,7 +53,7 @@ export default function HomeMenu(props) {
                                                 <p>{cumRap.diaChi}</p>
                                                 <div className="grid grid-cols-6 gap-6">
                                                     {phim.lstLichChieuTheoPhim?.slice(0, 12).map((lichChieu, index) => {
-                                                        return <NavLink className="text-xl text-red-400" to="/" key={index}>
+                                                        return <NavLink className="text-xl text-red-400" to={`/checkout/${lichChieu.maLichChieu}`} key={index}>
                                                             {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
                                                         </NavLink>
                                                     })}
