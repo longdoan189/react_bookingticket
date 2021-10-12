@@ -16,6 +16,7 @@ function Checkout(props) {
 
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
     const { chiTietPhongVe, danhSachGheDangDat } = useSelector(state => state.QuanLyDatVeReducer);
+    console.log('danhSachGheDangDat',danhSachGheDangDat);
 
     const dispatch = useDispatch();
 

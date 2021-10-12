@@ -20,22 +20,22 @@ export default function Header(props) {
         i18n.changeLanguage(value);
     }
 
-    const renderLogin = () => {
-        if (_.isEmpty(userLogin)) {
-            return <Fragment>
-                <button className="self-center px-8 py-3 rounded" onClick={() => {
-                    history.push('/login');
-                }}>{t('signin')}</button>
-                <button className="self-center px-8 py-3 font-semibold rounded dark:bg-cyan-400 dark:text-coolGray-900" onClick={() => {
-                    history.push('/register');
-                }}>{t('signup')}</button>
-            </Fragment>
-        } else {
-            return <button className="self-center px-8 py-3 rounded" onClick={() => {
-                history.push('/profile');
-            }}>Hello {userLogin.taiKhoan}</button>
-        }
-    }
+    // const renderLogin = () => {
+    //     if (_.isEmpty(userLogin)) {
+    //         return <Fragment>
+    //             <button className="self-center px-8 py-3 rounded" onClick={() => {
+    //                 history.push('/login');
+    //             }}>{t('signin')}</button>
+    //             <button className="self-center px-8 py-3 font-semibold rounded dark:bg-cyan-400 dark:text-coolGray-900" onClick={() => {
+    //                 history.push('/register');
+    //             }}>{t('signup')}</button>
+    //         </Fragment>
+    //     } else {
+    //         return <button className="self-center px-8 py-3 rounded" onClick={() => {
+    //             history.push('/profile');
+    //         }}>Hello {userLogin.taiKhoan}</button>
+    //     }
+    // }
 
     return (
         <header className="p-4 bg-coolGray-100 text-coolGray-800 bg-black text-white bg-opacity-40 fixed w-full z-10">
@@ -55,7 +55,14 @@ export default function Header(props) {
                     </li>
                 </ul>
                 <div className="items-center flex-shrink-0 hidden lg:flex">
-                    {renderLogin()}
+
+                    {/* {renderLogin()} */}
+                    <button className="self-center px-8 py-3 rounded" onClick={() => {
+                    history.push('/login');
+                }}>{t('signin')}</button>
+                <button className="self-center px-8 py-3 font-semibold rounded dark:bg-cyan-400 dark:text-coolGray-900" onClick={() => {
+                    history.push('/register');
+                }}>{t('signup')}</button>
                     <Select defaultValue="en" style={{ width: 120 }} onChange={handleChange}>
                         <Option value="en">
                             <div className="flex flex-row justify-between">

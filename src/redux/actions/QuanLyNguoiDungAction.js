@@ -26,7 +26,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
     }
 }
 
-export const layThongTinNguoiDungAction = (thongTinDangNhap) => {
+export const layThongTinNguoiDungAction = () => {
     return async (dispatch) => {
         try{
             const result = await quanLyNguoiDungService.layThongTinNguoiDung();
