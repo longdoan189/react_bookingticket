@@ -1,0 +1,25 @@
+{
+    "hello": {
+        "1": "你好",
+        "2": "心潮"
+    },
+    "signin": "登入",
+    "signup": "报名",
+    "home": "家",
+    "contact": "接触",
+    "news": "消息",
+    "booking": "订票", 
+    "partner": "伙伴",
+    "app": "移动应用",
+    "copyright": "版权所有",
+    "upcomingmovie": "电影即将上映",
+    "playingmovie": "电影院正在播放",
+    "detail": "细节",
+    "login": "登录",
+    "username": "用户名",
+    "password": "密码",
+    "forgotpassword": "忘记密码 ?",
+    "enterusername": "输入你的用户名",
+    "enterpassword": "输入您的密码",
+    "noaccount": "没有账号 ?"
+}

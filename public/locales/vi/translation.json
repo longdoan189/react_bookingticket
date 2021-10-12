@@ -1,0 +1,25 @@
+{
+    "hello": {
+        "1": "Xin chào",
+        "2": "Xin chào"
+    },
+    "signin": "Đăng nhập",
+    "signup": "Đăng ký",
+    "home": "TRANG CHỦ",
+    "contact": "LIÊN HỆ",
+    "news": "TIN TỨC",
+    "booking": "ĐẶT VÉ", 
+    "partner": "ĐỐI TÁC",
+    "app": "ỨNG DỤNG",
+    "copyright": "Đã Đăng Ký Bản Quyền",
+    "upcomingmovie": "PHIM SẮP CHIẾU",
+    "playingmovie": "PHIM ĐANG CHIẾU",
+    "detail": "Chi tiết",
+    "login": "ĐĂNG NHẬP",
+    "username": "TÀI KHOẢN",
+    "password": "MẬT KHẨU",
+    "forgotpassword": "QUÊN MẬT KHẨU ?",
+    "enterusername": "Nhập tài khoản của bạn",
+    "enterpassword": "Nhập mật khẩu của bạn",
+    "noaccount": "Bạn chưa có tài khoản ? "
+}

@@ -2,9 +2,15 @@ import React from 'react';
 import './Film_Flip.css';
 import { PlayCircleOutlined } from '@ant-design/icons';
 import {history} from '../../App';
+import { useTranslation } from 'react-i18next';
+
 
 export default function Film_Flip(props) {
+    const { t, i18n } = useTranslation();
 
+    const handleChange = (value) => {
+        i18n.changeLanguage(value);
+    }
     const { item } = props;
 
     return (
@@ -27,7 +33,7 @@ export default function Film_Flip(props) {
             </div>
             <div className="bg-orange-300 text-center cursor-pointer py-2 bg-indigo-300 my-2 text-success-50 font-bold" onClick={()=>{
                 history.push(`/detail/${item.maPhim}`);
-            }}>ĐẶT VÉ</div>
+            }}>{t('booking')}</div>
         </div>
 
     )

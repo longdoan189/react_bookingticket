@@ -1,0 +1,25 @@
+{
+    "hello": {
+        "1": "hello",
+        "2": "hi"
+    },
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "home": "HOME",
+    "contact": "CONTACT",
+    "news": "NEWS",
+    "booking": "BOOKING TICKET", 
+    "partner": "PARTNER",
+    "app": "MOBILE APP",
+    "copyright": "All rights reserved",
+    "upcomingmovie": "UPCOMING MOVIE",
+    "playingmovie": "PLAYING MOVIE",
+    "detail": "Detail",
+    "login": "LOGIN",
+    "username": "Username",
+    "password": "Password",
+    "forgotpassword": "Forgot Password?",
+    "enterusername": "Enter your username",
+    "enterpassword": "Enter your password",
+    "noaccount": "Don't have an account ? "
+}

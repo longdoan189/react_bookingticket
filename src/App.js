@@ -12,6 +12,7 @@ import Detail from './components/Detail/Detail';
 import {CheckoutTemplate} from './templates/CheckoutTemplate/CheckoutTemplate';
 import Checkout from './pages/Checkout/Checkout';
 import { Suspense, lazy } from 'react';
+import Profile from './pages/Profile/Profile';
 
 // const CheckoutTemplateLazy = lazy(() => import('./templates/CheckoutTemplate/CheckoutTemplate'));
 
@@ -25,7 +26,8 @@ function App() {
         <HomeTemplate path="/contact" exact Component={Contact} />
         <HomeTemplate path="/news" exact Component={News} />
         <HomeTemplate path="/detail/:id" exact Component={Detail} />
-        <Route path="/register" exact Component={Register} />
+        <HomeTemplate path="/profile" exact Component={Profile} />
+        <UserTemplate path="/register" exact Component={Register} />
         <CheckoutTemplate path="/checkout/:id" exact Component={Checkout} />
         <UserTemplate path="/login" exact Component={Login} />
         {/* <Suspense fallback={<div>Loading...</div>}>
