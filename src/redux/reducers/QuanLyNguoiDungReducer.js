@@ -1,5 +1,5 @@
 import {DANG_NHAP_ACTION, SET_THONG_TIN_NGUOI_DUNG} from '../../redux/actions/types/QuanLyNguoiDungType';
-import { USER_LOGIN } from '../../util/settings/config';
+import { TOKEN, USER_LOGIN } from '../../util/settings/config';
 
 
 let user = {}
@@ -17,6 +17,7 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
         case DANG_NHAP_ACTION: {
             const {thongTinDangNhap} = action;
             localStorage.setItem(USER_LOGIN, JSON.stringify(thongTinDangNhap));
+            localStorage.setItem(TOKEN, thongTinDangNhap.accessToken);
 
             return {...state, userLogin:thongTinDangNhap}
         }

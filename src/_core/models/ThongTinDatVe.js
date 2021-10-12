@@ -1,7 +1,12 @@
 export class ThongTinDatVe {
     maLichChieu = 0;
-    danhSachVe = [];
-    constructor() {
-        
+    danhSachVe = [
+        {
+            maGhe: 0,
+            giaVe: 0
+        }
+    ];
+    constructor(props) {
+       
     }
 }
