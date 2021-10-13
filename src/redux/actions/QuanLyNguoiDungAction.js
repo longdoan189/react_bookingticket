@@ -2,11 +2,13 @@ import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
 import { DANG_NHAP_ACTION } from "./types/QuanLyNguoiDungType";
 import { history } from "../../App";
 import {SET_THONG_TIN_NGUOI_DUNG} from '../../redux/actions/types/QuanLyNguoiDungType';
+import { hideLoadingAction, showLoadingAction } from "./LoadingActions";
 
 
 export const dangNhapAction = (thongTinDangNhap) => {
     return async (dispatch) => {
         try{
+            await dispatch(showLoadingAction);
             const result = await quanLyNguoiDungService.dangNhap(thongTinDangNhap);
             if(result.data.statusCode === 200){
                 console.log(result.data.content, DANG_NHAP_ACTION)
@@ -19,8 +21,10 @@ export const dangNhapAction = (thongTinDangNhap) => {
             }
 
             console.log('result', result);
+            dispatch(hideLoadingAction);
 
         }catch(error) {
+            dispatch(hideLoadingAction);
             console.log('error', error.response);
         }
     }
@@ -29,6 +33,7 @@ export const dangNhapAction = (thongTinDangNhap) => {
 export const layThongTinNguoiDungAction = () => {
     return async (dispatch) => {
         try{
+            await dispatch(showLoadingAction);
             const result = await quanLyNguoiDungService.layThongTinNguoiDung();
             
             if(result.data.statusCode === 200){
@@ -38,8 +43,11 @@ export const layThongTinNguoiDungAction = () => {
                 })
             }
             console.log(result);
+
+            dispatch(hideLoadingAction);
         }
         catch(error){
+            dispatch(hideLoadingAction);
             console.log('error', error.response.data);
         }
     }

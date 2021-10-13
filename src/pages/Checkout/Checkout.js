@@ -5,11 +5,12 @@ import _ from 'lodash';
 import { layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import './Checkout.css';
 import { CloseCircleOutlined, UserOutlined, CheckOutlined } from '@ant-design/icons';
-import { DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
+import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
 import { datVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import { Tabs } from 'antd';
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
+import moment from 'moment';
 
 
 function Checkout(props) {
@@ -173,8 +174,17 @@ function Checkout(props) {
 const { TabPane } = Tabs;
 
 export default function (props) {
+
+    const {activeTab} = useSelector(state => state.QuanLyDatVeReducer);
+    const dispatch = useDispatch();
+
     return <div className="p-5">
-        <Tabs defaultActiveKey="1" >
+        <Tabs defaultActiveKey="1" activeKey={activeTab} onChange={(key)=>{
+            dispatch({
+                type: CHANGE_TAB,
+                number: key
+            })
+        }}>
             <TabPane tab="01 CHỌN GHẾ && THANH TOÁN" key="1">
                 <Checkout {...props} />
             </TabPane>
@@ -201,12 +211,20 @@ export function KetQuaDatVe(props) {
 
     const renderTicketItem = () => {
         return thongTinNguoiDung.thongTinDatVe?.map((ticket, index) => {
+            const seats = _.first(ticket.danhSachGhe);
+
             return <div className="p-2 lg:w-1/3 md:w-1/2 w-full" key={index}>
                 <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
-                    <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://picsum.photos/200/200" />
+                    <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={ticket.hinhAnh} width={50} height={50} />
                     <div className="flex-grow">
                         <h2 className="text-gray-900 title-font font-medium">{ticket.tenPhim}</h2>
-                        <p className="text-gray-500">{ticket.ngayDat}</p>
+                        <p className="text-gray-500">Giờ chiếu: {moment(ticket.ngayDat).format('hh:mm A')} - Ngày chiếu: {moment(ticket.ngayDat).format('DD-MM-YYYY')}</p>
+                        <p>Địa điểm: {seats.tenHeThongRap}</p>
+                        <p>
+                            Tên rạp: {seats.tenCumRap} - Ghế: {ticket.danhSachGhe.map((ghe,index)=>{
+                                return <span key={index} className="mr-1">[{ghe.tenGhe}]</span>
+                            })}
+                        </p>
                     </div>
                 </div>
             </div>
