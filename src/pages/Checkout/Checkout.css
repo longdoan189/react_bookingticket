@@ -7,12 +7,8 @@
     margin: 15px;
     background-color: rgb(123,122,122);
     color: #fff;
-    border: 1px solid aqua;
+    border: 2px solid aqua;
     cursor: pointer;
-}
-
-.ghe:focus {
-    border: 3px solid aqua;
 }
 
 .gheDaDat {
@@ -25,7 +21,11 @@
 }
 
 .gheVip {
-    background-color: orangered;
+    background-color: orange;
+}
+
+.gheVip:focus {
+    background: linear-gradient(to top, #fcc5e4 0%, #fda34b 15%, #ff7882 35%, #c8699e 52%, #7046aa 71%, #0c1db8 87%, #020f75 100%);
 }
 
 .gheDaDuocDat {
@@ -36,3 +36,7 @@
     border: 1px solid orange;
 }
 
+.gheKhachDat {
+    background-color: purple;
+    cursor: no-drop;
+}

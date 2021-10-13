@@ -4,7 +4,7 @@ import style from './Checkout.module.css';
 import _ from 'lodash';
 import { layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import './Checkout.css';
-import { CloseCircleOutlined, UserOutlined, CheckOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, UserOutlined, CheckOutlined, TeamOutlined } from '@ant-design/icons';
 import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
 import { datVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
@@ -16,7 +16,7 @@ import moment from 'moment';
 function Checkout(props) {
 
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
-    const { chiTietPhongVe, danhSachGheDangDat } = useSelector(state => state.QuanLyDatVeReducer);
+    const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.QuanLyDatVeReducer);
     console.log('danhSachGheDangDat',danhSachGheDangDat);
 
     const dispatch = useDispatch();
@@ -34,9 +34,15 @@ function Checkout(props) {
         return danhSachGhe.map((ghe, index) => {
             let classGheVip = ghe.loaiGhe === 'Vip' ? 'gheVip' : ''
             let classGheDaDat = ghe.daDat === true ? 'gheDaDat' : ''
-            let classGheDangDat = '';
 
+            let classGheDangDat = '';
             let indexGheDD = danhSachGheDangDat.findIndex(gheDD => gheDD.maGhe === ghe.maGhe);
+
+            let classGheKhachDat = '';
+            let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.maGhe === ghe.maGhe);
+            if(indexGheKD !== -1){
+                classGheKhachDat = 'gheKhachDat';
+            }
 
             let classGheDaDuocDat = '';
             if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) {
@@ -53,8 +59,8 @@ function Checkout(props) {
                         type: DAT_VE,
                         gheDuocChon: ghe
                     })
-                }} disabled={ghe.daDat} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} text-center`} key={index}>
-                    {ghe.daDat ? classGheDaDuocDat != '' ? <UserOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : <CloseCircleOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : ghe.stt}
+                }} disabled={ghe.daDat || classGheKhachDat !== ''} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat} text-center`} key={index}>
+                    {ghe.daDat ? classGheDaDuocDat !== '' ? <UserOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : <CloseCircleOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : classGheKhachDat ? <TeamOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : ghe.stt}
                 </button>
                 {(index + 1) % 10 === 0 ? <br /> : ''}
             </Fragment>
@@ -77,7 +83,7 @@ function Checkout(props) {
                         </div>
                     </div>
                     <div className="mt-5 flex justify-center">
-                        <table className="w-2/3 divide-y divide-gray-200 text-left table-auto">
+                        <table className="w-full divide-y divide-gray-200 text-left table-auto">
                             <thead className="bg-gray-50">
                                 <tr>
                                     <th>Ghế chưa đặt</th>
@@ -85,6 +91,7 @@ function Checkout(props) {
                                     <th>Ghế Vip</th>
                                     <th>Ghế đã được đặt</th>
                                     <th>Ghế bạn đặt</th>
+                                    <th>Ghế khách đang đặt</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
@@ -94,6 +101,7 @@ function Checkout(props) {
                                     <td><button className="ghe gheVip text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
                                     <td><button className="ghe gheDaDat text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
                                     <td><button className="ghe gheDaDuocDat text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
+                                    <td><button className="ghe gheKhachDat text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
                                 </tr>
                             </tbody>
                         </table>

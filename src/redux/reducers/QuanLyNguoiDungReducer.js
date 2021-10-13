@@ -1,4 +1,4 @@
-import {DANG_NHAP_ACTION, SET_THONG_TIN_NGUOI_DUNG} from '../../redux/actions/types/QuanLyNguoiDungType';
+import {DANG_KY_ACTION, DANG_NHAP_ACTION, SET_THONG_TIN_NGUOI_DUNG} from '../../redux/actions/types/QuanLyNguoiDungType';
 import { TOKEN, USER_LOGIN } from '../../util/settings/config';
 
 
@@ -27,6 +27,10 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
             return {...state}
         }
 
+        case DANG_KY_ACTION: {
+            const {thongTinDangKy} = action;
+            return {...state}
+        }
 
         default: return { ...state }
     }
