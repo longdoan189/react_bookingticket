@@ -28,8 +28,6 @@ export default function Login(props) {
             dispatch(action);
         }
     });
-
-
     return (
         <form onSubmit={formik.handleSubmit} className="lg:w-1/2 xl:max-w-screen-sm">
             <div className="py-12 bg-indigo-100 lg:bg-white flex justify-center lg:justify-start lg:px-12">
@@ -56,7 +54,7 @@ export default function Login(props) {
                     <div>
                         <div>
                             <div className="text-sm font-bold text-gray-700 tracking-wide">{t('username')}</div>
-                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder={`${t('enterusername')}`} name="taiKhoan" onChange={formik.handleChange} />
+                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" placeholder={`${t('enterusername')}`} name="taiKhoan" onChange={formik.handleChange}/>
                         </div>
                         <div className="mt-8">
                             <div className="flex justify-between items-center">
@@ -70,7 +68,7 @@ export default function Login(props) {
                                     </a>
                                 </div>
                             </div>
-                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="password" placeholder={`${t('enterpassword')}`} name="matKhau" onChange={formik.handleChange} />
+                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="password" placeholder={`${t('enterpassword')}`} name="matKhau" onChange={formik.handleChange}/>
                         </div>
                         <div className="mt-10">
                             <button className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg" type="submit">
@@ -79,8 +77,10 @@ export default function Login(props) {
                         </div>
                     </div>
                     <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-                        {t('noaccount')} <NavLink to="/register" className="cursor-pointer text-indigo-600 hover:text-indigo-800">{t('signup')}?</NavLink>
+                        {t('noaccount')} <NavLink to="/register" className="cursor-pointer text-indigo-600 hover:text-indigo-800">{t('signup')}</NavLink>
                     </div>
+                    <button type="submit">
+                    </button>
                 </div>
             </div>
         </form>

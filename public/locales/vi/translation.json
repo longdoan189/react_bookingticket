@@ -21,5 +21,17 @@
     "forgotpassword": "QUÊN MẬT KHẨU ?",
     "enterusername": "Nhập tài khoản của bạn",
     "enterpassword": "Nhập mật khẩu của bạn",
-    "noaccount": "Bạn chưa có tài khoản ? "
+    "noaccount": "Bạn chưa có tài khoản ? ",
+    "email_address": "Địa chỉ email",
+    "full_name": "Họ tên",
+    "phone_number": "Số điện thoại",
+    "retype_password": "Nhập lại mật khẩu",
+    "have_account": "Đã có tài khoản?",
+    "required": "Phải nhập",
+    "valid_email": "Nhập địa chỉ email hợp lệ",
+    "pwlt8": "Mật khẩu phải có ít nhất 8 kí tự",
+    "match_password": "Mật khẩu phải giống với ô trên",
+    "valid_number": "Nhập số điện thoại hợp lệ",
+    "only_character": "Chỉ được nhập kí tự chữ",
+    "register_success": "Đăng ký thành công!"
 }

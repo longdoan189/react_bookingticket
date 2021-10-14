@@ -21,5 +21,17 @@
     "forgotpassword": "Forgot Password?",
     "enterusername": "Enter your username",
     "enterpassword": "Enter your password",
-    "noaccount": "Don't have an account ? "
+    "noaccount": "Don't have an account ? ",
+    "email_address": "Email address",
+    "full_name": "Full name",
+    "phone_number": "Phone number",
+    "retype_password": "Retype password",
+    "have_account": "Already have an account?",
+    "required": "Required",
+    "valid_email": "Enter a valid email",
+    "pwlt8": "Password must have at least 8 characters",
+    "match_password": "Password must match",
+    "valid_number": "Enter a valid phone number",
+    "only_character": "Only alphabetic character allowed",
+    "register_success": "Registered successfully!"
 }
