@@ -11,13 +11,13 @@ import Register from './pages/Register/Register';
 import Detail from './components/Detail/Detail';
 import {CheckoutTemplate} from './templates/CheckoutTemplate/CheckoutTemplate';
 import Checkout from './pages/Checkout/Checkout';
-import { Suspense, lazy } from 'react';
 import Profile from './pages/Profile/Profile';
 import Loading from './components/Loading/Loading';
 import { AdminTemplate } from './templates/AdminTemplate/AdminTemplate';
 import Dashboard from './pages/Admin/Dashboard/Dashboard';
 import Films from './pages/Admin/Films/Films';
 import ShowTime from './pages/Admin/ShowTime/ShowTime';
+import Users from './pages/Admin/Users/Users';
 
 // const CheckoutTemplateLazy = lazy(() => import('./templates/CheckoutTemplate/CheckoutTemplate'));
 
@@ -41,7 +41,7 @@ function App() {
 
         <AdminTemplate path="/admin" exact Component={Dashboard} />
         <AdminTemplate path="/admin/films" exact Component={Films} />
-        <AdminTemplate path="/admin/users" exact Component={Dashboard} />
+        <AdminTemplate path="/admin/users" exact Component={Users} />
         <AdminTemplate path="/admin/showtimes" exact Component={ShowTime} />
 
         <HomeTemplate path="/" exact Component={Home} />

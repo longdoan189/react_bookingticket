@@ -14,9 +14,9 @@ export const UserTemplate = (props) => {
 
     return <Route {...restProps} render={(propsRoute) => {
         return <Fragment>
-            <div className="lg:flex" style={{height:'100vh'}}>
+            <div className="lg:flex">
                 <Component {...propsRoute} />
-                <div className="hidden lg:flex items-center justify-center flex-1 py-96 mt-40">
+                <div className="hidden lg:flex items-center justify-center flex-1 bg-indigo-100">
                     <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
                         <svg className="w-5/6 mx-auto" xmlns="http://www.w3.org/2000/svg" id="f080dbb7-9b2b-439b-a118-60b91c514f72" data-name="Layer 1" viewBox="0 0 528.71721 699.76785">
                             <title>Login</title>

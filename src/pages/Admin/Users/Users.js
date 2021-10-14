@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ShowTime(props) {
+export default function Users(props) {
     return (
         <div>
-            ShowTime
+            Users
         </div>
     )
 }

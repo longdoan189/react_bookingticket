@@ -1,14 +1,14 @@
+import { DesktopOutlined, FileOutlined, UserOutlined } from '@ant-design/icons';
+import { Breadcrumb, Layout, Menu } from 'antd';
+import _ from 'lodash';
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Route } from "react-router";
-import { Layout, Menu, Breadcrumb } from 'antd';
-import {
-    DesktopOutlined,
-    PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
-    UserOutlined,
-} from '@ant-design/icons';
+import { NavLink } from "react-router-dom";
+import swal from 'sweetalert';
+import { history } from "../../App";
+import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from "../../util/settings/config";
+
 
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -20,7 +20,6 @@ export const AdminTemplate = (props) => {
     const [collapsed, setCollapsed] = useState(false);
 
     const onCollapse = () => {
-        // console.log(collapsed);
         setCollapsed({ collapsed })
     }
 
@@ -30,32 +29,64 @@ export const AdminTemplate = (props) => {
         }
     })
 
-    return <Route {...restProps} render={() => {
+    if(!localStorage.getItem(USER_LOGIN)){
+        swal({
+            title: "WARNING",
+            text: "Bạn không có quyền truy cập vào trang này !!!",
+            buttons:'Đã hiểu',
+            icon: "error",
+        });
+        history.push('/');
+    }
+
+    const operations = <Fragment>
+        {!_.isEmpty(userLogin) ? <Fragment>
+            <button onClick={() => {
+                history.push('/profile');
+            }}> <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 mr-10">{userLogin.taiKhoan.substr(0, 1)}</div>
+            </button>
+            <button className="text-blue-500 font-bold" onClick={() => {
+                localStorage.removeItem(USER_LOGIN);
+                localStorage.removeItem(TOKEN);
+                localStorage.removeItem(TOKEN_CYBERSOFT);
+                history.push('/home');
+                window.location.reload();
+            }}>Đăng xuất</button>
+        </Fragment> : ''}
+    </Fragment>
+
+    return <Route {...restProps} render={(propsRoute) => {
         return <Fragment>
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
-                    <div className="logo" />
+                    <div className="logo p-5">
+                        <img src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="cyberlearn.vn" />
+                    </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
                         <Menu.Item key="1" icon={<UserOutlined />}>
-                            Users
+                            <NavLink to="/admin/users">Users</NavLink>
                         </Menu.Item>
                         <Menu.Item key="2" icon={<FileOutlined />}>
-                            Films
+                            <NavLink to="/admin/films">Films</NavLink>
                         </Menu.Item>
-                        <Menu.Item key="9" icon={<DesktopOutlined />}>
-                            Showtimes
+                        <Menu.Item key="3" icon={<DesktopOutlined />}>
+                            <NavLink to="/admin/showtimes">Showtimes</NavLink>
                         </Menu.Item>
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{ padding: 0 }} />
+                    <Header className="site-layout-background" style={{ padding: 0, background:'white' }}>
+                        <div className="text-right pr-10 pt-1">
+                            {operations}
+                        </div>
+                    </Header>
                     <Content style={{ margin: '0 16px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
-                            <Breadcrumb.Item>User</Breadcrumb.Item>
-                            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                            {/* <Breadcrumb.Item>User</Breadcrumb.Item>
+                            <Breadcrumb.Item>Bill</Breadcrumb.Item> */}
                         </Breadcrumb>
-                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
-                            Bill is a cat.
+                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360, background:'white' }}>
+                            <Component {...propsRoute} />
                         </div>
                     </Content>
                 </Layout>
@@ -64,3 +95,5 @@ export const AdminTemplate = (props) => {
     }} />
 
 }
+
+
