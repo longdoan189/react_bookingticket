@@ -7,6 +7,7 @@ import _ from 'lodash';
 //Hook đa ngôn ngữ
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from '../../../../util/settings/config';
 
 const { Option } = Select;
 
@@ -31,9 +32,18 @@ export default function Header(props) {
                 }}>{t('signup')}</button>
             </Fragment>
         } else {
-            return <button className="self-center px-8 py-3 rounded" onClick={() => {
-                history.push('/profile');
-            }}>Hello {userLogin.taiKhoan}</button>
+            return <Fragment>
+                <button className="self-center px-8 py-3 rounded" onClick={() => {
+                    history.push('/profile');
+                }}>{t("hello.1")} {userLogin.taiKhoan}</button>
+                <button className="text-blue-300 mr-5" onClick={() => {
+                    localStorage.removeItem(USER_LOGIN);
+                    localStorage.removeItem(TOKEN);
+                    localStorage.removeItem(TOKEN_CYBERSOFT);
+                    history.push('/home');
+                    window.location.reload();
+                }}>Đăng xuất</button>
+            </Fragment>
         }
     }
 
@@ -56,14 +66,9 @@ export default function Header(props) {
                 </ul>
                 <div className="items-center flex-shrink-0 hidden lg:flex">
 
-                    {/* {renderLogin()} */}
-                    <button className="self-center px-8 py-3 rounded" onClick={() => {
-                    history.push('/login');
-                }}>{t('signin')}</button>
-                <button className="self-center px-8 py-3 font-semibold rounded dark:bg-cyan-400 dark:text-coolGray-900" onClick={() => {
-                    history.push('/register');
-                }}>{t('signup')}</button>
-                    <Select defaultValue={localStorage.getItem('i18nextLng')} style={{ width: 120 }} onChange={handleChange}>
+                    {renderLogin()}
+
+                    <Select defaultValue={localStorage.getItem('i18nextLng')} style={{ width: 100 }} onChange={handleChange}>
                         <Option value="en">
                             <div className="flex flex-row justify-between">
                                 <span className="text-base">EN</span>

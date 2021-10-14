@@ -32,7 +32,6 @@ export const QuanLyNguoiDungReducer = (state = stateDefault, action) => {
             return {...state}
         }
 
-
         default: return { ...state }
     }
 }

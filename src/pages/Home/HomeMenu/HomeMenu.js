@@ -17,7 +17,6 @@ export default function HomeMenu(props) {
 
     useEffect(() => {
         console.log('heThongRapChieu', props);
-
     }, []);
 
     const [state, setState] = useState({

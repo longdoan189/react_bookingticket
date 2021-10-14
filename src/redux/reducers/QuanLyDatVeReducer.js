@@ -6,6 +6,7 @@ import { CHANGE_TAB, CHUYEN_TAB, DAT_VE, DAT_VE_HOAN_TAT, SET_CHI_TIET_PHONG_VE 
 const stateDefault = {
     chiTietPhongVe: new ThongTinLichChieu(),
     danhSachGheDangDat: [],
+    danhSachGheKhachDat: [{maGhe:51582},{maGhe:51583}],
     activeTab: '1'
 }
 

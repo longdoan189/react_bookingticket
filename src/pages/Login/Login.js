@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -6,10 +6,14 @@ import { useDispatch } from 'react-redux';
 import { dangNhapAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import { history } from '../../App';
 import { useTranslation } from 'react-i18next';
-
+import {EyeInvisibleOutlined, EyeOutlined} from '@ant-design/icons';
 
 export default function Login(props) {
     const { t, i18n } = useTranslation();
+    const [passwordShow,setPasswordShow] = useState(true);
+    const togglePasswordShow = () => {
+        setPasswordShow(passwordShow ? false : true);
+    }
 
     const handleChange = (value) => {
         i18n.changeLanguage(value);
@@ -68,7 +72,12 @@ export default function Login(props) {
                                     </a>
                                 </div>
                             </div>
-                            <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type="password" placeholder={`${t('enterpassword')}`} name="matKhau" onChange={formik.handleChange}/>
+                            <div style={{position:'relative'}}>
+                                <input className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500" type={passwordShow ? 'password' : 'text'} placeholder={`${t('enterpassword')}`} name="matKhau" onChange={formik.handleChange}  />
+                                {
+                                    passwordShow ? <EyeInvisibleOutlined style={{position:'absolute',top:'15px',right:'15px',cursor:'pointer'}} onClick={togglePasswordShow} /> : <EyeOutlined style={{position:'absolute',top:'15px',right:'15px',cursor:'pointer'}} onClick={togglePasswordShow} />
+                                }
+                            </div>
                         </div>
                         <div className="mt-10">
                             <button className="bg-indigo-500 text-gray-100 p-4 w-full rounded-full tracking-wide font-semibold font-display focus:outline-none focus:shadow-outline hover:bg-indigo-600 shadow-lg" type="submit">
@@ -79,8 +88,7 @@ export default function Login(props) {
                     <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
                         {t('noaccount')} <NavLink to="/register" className="cursor-pointer text-indigo-600 hover:text-indigo-800">{t('signup')}</NavLink>
                     </div>
-                    <button type="submit">
-                    </button>
+                    <button type="submit"></button>
                 </div>
             </div>
         </form>

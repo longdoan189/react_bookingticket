@@ -4,20 +4,23 @@ import style from './Checkout.module.css';
 import _ from 'lodash';
 import { layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import './Checkout.css';
-import { CloseCircleOutlined, UserOutlined, CheckOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, UserOutlined, CheckOutlined, TeamOutlined, HomeOutlined } from '@ant-design/icons';
 import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
 import { datVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import { Tabs } from 'antd';
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import moment from 'moment';
+import { history } from '../../App';
+import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from '../../util/settings/config';
+import { NavLink } from 'react-router-dom';
 
 
 function Checkout(props) {
 
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
-    const { chiTietPhongVe, danhSachGheDangDat } = useSelector(state => state.QuanLyDatVeReducer);
-    console.log('danhSachGheDangDat',danhSachGheDangDat);
+    const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.QuanLyDatVeReducer);
+    console.log('danhSachGheDangDat', danhSachGheDangDat);
 
     const dispatch = useDispatch();
 
@@ -34,9 +37,15 @@ function Checkout(props) {
         return danhSachGhe.map((ghe, index) => {
             let classGheVip = ghe.loaiGhe === 'Vip' ? 'gheVip' : ''
             let classGheDaDat = ghe.daDat === true ? 'gheDaDat' : ''
-            let classGheDangDat = '';
 
+            let classGheDangDat = '';
             let indexGheDD = danhSachGheDangDat.findIndex(gheDD => gheDD.maGhe === ghe.maGhe);
+
+            let classGheKhachDat = '';
+            let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.maGhe === ghe.maGhe);
+            if (indexGheKD !== -1) {
+                classGheKhachDat = 'gheKhachDat';
+            }
 
             let classGheDaDuocDat = '';
             if (userLogin.taiKhoan === ghe.taiKhoanNguoiDat) {
@@ -53,8 +62,8 @@ function Checkout(props) {
                         type: DAT_VE,
                         gheDuocChon: ghe
                     })
-                }} disabled={ghe.daDat} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} text-center`} key={index}>
-                    {ghe.daDat ? classGheDaDuocDat != '' ? <UserOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : <CloseCircleOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : ghe.stt}
+                }} disabled={ghe.daDat || classGheKhachDat !== ''} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat} text-center`} key={index}>
+                    {ghe.daDat ? classGheDaDuocDat !== '' ? <UserOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : <CloseCircleOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : classGheKhachDat ? <TeamOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : ghe.stt}
                 </button>
                 {(index + 1) % 10 === 0 ? <br /> : ''}
             </Fragment>
@@ -77,7 +86,7 @@ function Checkout(props) {
                         </div>
                     </div>
                     <div className="mt-5 flex justify-center">
-                        <table className="w-2/3 divide-y divide-gray-200 text-left table-auto">
+                        <table className="w-full divide-y divide-gray-200 text-left table-auto">
                             <thead className="bg-gray-50">
                                 <tr>
                                     <th>Ghế chưa đặt</th>
@@ -85,6 +94,7 @@ function Checkout(props) {
                                     <th>Ghế Vip</th>
                                     <th>Ghế đã được đặt</th>
                                     <th>Ghế bạn đặt</th>
+                                    <th>Ghế khách đang đặt</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
@@ -94,6 +104,7 @@ function Checkout(props) {
                                     <td><button className="ghe gheVip text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
                                     <td><button className="ghe gheDaDat text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
                                     <td><button className="ghe gheDaDuocDat text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
+                                    <td><button className="ghe gheKhachDat text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -174,12 +185,37 @@ function Checkout(props) {
 const { TabPane } = Tabs;
 
 export default function (props) {
-
-    const {activeTab} = useSelector(state => state.QuanLyDatVeReducer);
+    const { activeTab } = useSelector(state => state.QuanLyDatVeReducer);
+    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        return () => {
+            dispatch({
+                type: CHANGE_TAB,
+                number: '1'
+            })
+        }
+    }, [])
+
+    const operations = <Fragment>
+        {!_.isEmpty(userLogin) ? <Fragment>
+            <button onClick={() => {
+                history.push('/profile');
+            }}> <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 ml-5">{userLogin.taiKhoan.substr(0, 1)}</div>Hello {userLogin.taiKhoan} !
+            </button>
+            <button className="text-blue-800" onClick={() => {
+                localStorage.removeItem(USER_LOGIN);
+                localStorage.removeItem(TOKEN);
+                localStorage.removeItem(TOKEN_CYBERSOFT);
+                history.push('/home');
+                window.location.reload();
+            }}>Đăng xuất</button>
+        </Fragment> : ''}
+    </Fragment>
+
     return <div className="p-5">
-        <Tabs defaultActiveKey="1" activeKey={activeTab} onChange={(key)=>{
+        <Tabs tabBarExtraContent={operations} defaultActiveKey="1" activeKey={activeTab} onChange={(key) => {
             dispatch({
                 type: CHANGE_TAB,
                 number: key
@@ -190,6 +226,12 @@ export default function (props) {
             </TabPane>
             <TabPane tab="02 KẾT QUẢ ĐẶT VÉ" key="2">
                 <KetQuaDatVe {...props} />
+            </TabPane>
+            <TabPane tab={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <NavLink to="/home">
+                    <HomeOutlined style={{ fontSize: 25, marginLeft: 15 }} />
+                </NavLink>
+            </div>} key="3">
             </TabPane>
         </Tabs>
     </div>
@@ -221,7 +263,7 @@ export function KetQuaDatVe(props) {
                         <p className="text-gray-500">Giờ chiếu: {moment(ticket.ngayDat).format('hh:mm A')} - Ngày chiếu: {moment(ticket.ngayDat).format('DD-MM-YYYY')}</p>
                         <p>Địa điểm: {seats.tenHeThongRap}</p>
                         <p>
-                            Tên rạp: {seats.tenCumRap} - Ghế: {ticket.danhSachGhe.map((ghe,index)=>{
+                            Tên rạp: {seats.tenCumRap} - Ghế: {ticket.danhSachGhe.map((ghe, index) => {
                                 return <span key={index} className="mr-1">[{ghe.tenGhe}]</span>
                             })}
                         </p>

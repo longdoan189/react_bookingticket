@@ -31,10 +31,9 @@ export default function Film_Flip(props) {
                     </div>
                 </div>
             </div>
-            <div className="bg-orange-300 text-center cursor-pointer py-2 bg-indigo-300 my-2 text-success-50 font-bold" onClick={()=>{
+            <div className="bg-green-500 rounded-md text-center cursor-pointer py-2  my-2 text-success-50 font-bold" onClick={()=>{
                 history.push(`/detail/${item.maPhim}`);
             }}>{t('booking')}</div>
         </div>
-
     )
 }
