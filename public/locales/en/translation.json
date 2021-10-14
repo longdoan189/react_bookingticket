@@ -31,7 +31,7 @@
     "phone_number": "Phone number",
     "retype_password": "Retype password",
     "have_account": "Already have an account?",
-    "required": "Required",
+    "required": "*Required",
     "valid_email": "Enter a valid email",
     "pwlt8": "Password must have at least 8 characters",
     "phonenumberMin": "Phone number must have at least 10 numbers",
