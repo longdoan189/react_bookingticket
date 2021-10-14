@@ -4,20 +4,23 @@ import style from './Checkout.module.css';
 import _ from 'lodash';
 import { layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import './Checkout.css';
-import { CloseCircleOutlined, UserOutlined, CheckOutlined, TeamOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, UserOutlined, CheckOutlined, TeamOutlined, HomeOutlined } from '@ant-design/icons';
 import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
 import { datVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import { Tabs } from 'antd';
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import moment from 'moment';
+import { history } from '../../App';
+import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from '../../util/settings/config';
+import { NavLink } from 'react-router-dom';
 
 
 function Checkout(props) {
 
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
     const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.QuanLyDatVeReducer);
-    console.log('danhSachGheDangDat',danhSachGheDangDat);
+    console.log('danhSachGheDangDat', danhSachGheDangDat);
 
     const dispatch = useDispatch();
 
@@ -40,7 +43,7 @@ function Checkout(props) {
 
             let classGheKhachDat = '';
             let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.maGhe === ghe.maGhe);
-            if(indexGheKD !== -1){
+            if (indexGheKD !== -1) {
                 classGheKhachDat = 'gheKhachDat';
             }
 
@@ -182,12 +185,37 @@ function Checkout(props) {
 const { TabPane } = Tabs;
 
 export default function (props) {
-
-    const {activeTab} = useSelector(state => state.QuanLyDatVeReducer);
+    const { activeTab } = useSelector(state => state.QuanLyDatVeReducer);
+    const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        return () => {
+            dispatch({
+                type: CHANGE_TAB,
+                number: '1'
+            })
+        }
+    }, [])
+
+    const operations = <Fragment>
+        {!_.isEmpty(userLogin) ? <Fragment>
+            <button onClick={() => {
+                history.push('/profile');
+            }}> <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 ml-5">{userLogin.taiKhoan.substr(0, 1)}</div>Hello {userLogin.taiKhoan} !
+            </button>
+            <button className="text-blue-800" onClick={() => {
+                localStorage.removeItem(USER_LOGIN);
+                localStorage.removeItem(TOKEN);
+                localStorage.removeItem(TOKEN_CYBERSOFT);
+                history.push('/home');
+                window.location.reload();
+            }}>Đăng xuất</button>
+        </Fragment> : ''}
+    </Fragment>
+
     return <div className="p-5">
-        <Tabs defaultActiveKey="1" activeKey={activeTab} onChange={(key)=>{
+        <Tabs tabBarExtraContent={operations} defaultActiveKey="1" activeKey={activeTab} onChange={(key) => {
             dispatch({
                 type: CHANGE_TAB,
                 number: key
@@ -198,6 +226,12 @@ export default function (props) {
             </TabPane>
             <TabPane tab="02 KẾT QUẢ ĐẶT VÉ" key="2">
                 <KetQuaDatVe {...props} />
+            </TabPane>
+            <TabPane tab={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <NavLink to="/home">
+                    <HomeOutlined style={{ fontSize: 25, marginLeft: 15 }} />
+                </NavLink>
+            </div>} key="3">
             </TabPane>
         </Tabs>
     </div>
@@ -229,7 +263,7 @@ export function KetQuaDatVe(props) {
                         <p className="text-gray-500">Giờ chiếu: {moment(ticket.ngayDat).format('hh:mm A')} - Ngày chiếu: {moment(ticket.ngayDat).format('DD-MM-YYYY')}</p>
                         <p>Địa điểm: {seats.tenHeThongRap}</p>
                         <p>
-                            Tên rạp: {seats.tenCumRap} - Ghế: {ticket.danhSachGhe.map((ghe,index)=>{
+                            Tên rạp: {seats.tenCumRap} - Ghế: {ticket.danhSachGhe.map((ghe, index) => {
                                 return <span key={index} className="mr-1">[{ghe.tenGhe}]</span>
                             })}
                         </p>

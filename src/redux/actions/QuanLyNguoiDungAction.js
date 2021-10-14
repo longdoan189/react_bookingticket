@@ -8,7 +8,6 @@ import { hideLoadingAction, showLoadingAction } from "./LoadingActions";
 export const dangNhapAction = (thongTinDangNhap) => {
     return async (dispatch) => {
         try{
-            await dispatch(showLoadingAction);
             const result = await quanLyNguoiDungService.dangNhap(thongTinDangNhap);
            
             if(result.data.statusCode === 200){
@@ -21,30 +20,8 @@ export const dangNhapAction = (thongTinDangNhap) => {
             }
 
             console.log('result', result);
-            dispatch(hideLoadingAction);
-
         }catch(error) {
-            dispatch(hideLoadingAction);
             console.log('error', error.response);
-        }
-    }
-}
-
-export const layThongTinNguoiDungAction = () => {
-    return async (dispatch) => {
-        try{
-            const result = await quanLyNguoiDungService.layThongTinNguoiDung();
-            
-            if(result.data.statusCode === 200){
-                dispatch({
-                    type: SET_THONG_TIN_NGUOI_DUNG,
-                    thongTinNguoiDung: result.data.content
-                })
-            }
-            console.log(result);
-        }
-        catch(error){
-            console.log('error', error.response.data);
         }
     }
 }
@@ -52,7 +29,6 @@ export const layThongTinNguoiDungAction = () => {
 export const dangKyAction = (thongTinDangKy) => {
     return async (dispatch) => {
         try{
-            await dispatch(showLoadingAction);
             const result = await quanLyNguoiDungService.dangKy(thongTinDangKy);
             if(result.data.statusCode === 200){
                 console.log(result.data.content, DANG_KY_ACTION)
@@ -66,14 +42,36 @@ export const dangKyAction = (thongTinDangKy) => {
             }
 
             console.log('result', result);
-            dispatch(hideLoadingAction);
-
         }catch(error) {
-            dispatch(hideLoadingAction);
             console.log('error', error.response);
         }
     }
 }
+
+export const layThongTinNguoiDungAction = () => {
+    return async (dispatch) => {
+        try{
+            await dispatch(showLoadingAction);
+            const result = await quanLyNguoiDungService.layThongTinNguoiDung();
+            
+            if(result.data.statusCode === 200){
+                dispatch({
+                    type: SET_THONG_TIN_NGUOI_DUNG,
+                    thongTinNguoiDung: result.data.content
+                })
+            }
+            console.log(result);
+            dispatch(hideLoadingAction);
+
+        }
+        catch(error){
+            dispatch(hideLoadingAction);
+            console.log('error', error.response.data);
+        }
+    }
+}
+
+
 
 
 

@@ -3,7 +3,7 @@ import { history } from '../../App';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { dangKyAction } from '../../redux/actions/QuanLyNguoiDungAction';
-import { useFormik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import { useDispatch } from 'react-redux';
 import * as Yup from 'yup';
 import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';

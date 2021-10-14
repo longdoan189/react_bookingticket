@@ -1,5 +1,6 @@
 import {SET_CHI_TIET_PHIM, SET_HE_THONG_RAP_CHIEU} from '../../actions/types/QuanLyRapType';
 import {quanLyRapService} from '../../../services/QuanLyRapService';
+import { hideLoadingAction, showLoadingAction } from '../LoadingActions';
 
 export const layDanhSachHeThongRapAction = () => {
     return async (dispatch) => {

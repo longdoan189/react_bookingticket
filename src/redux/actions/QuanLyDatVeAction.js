@@ -4,7 +4,6 @@ import { hideLoadingAction, showLoadingAction } from "./LoadingActions";
 import { CHUYEN_TAB, DAT_VE_HOAN_TAT, SET_CHI_TIET_PHONG_VE } from "./types/QuanLyDatVeType";
 
 
-
 export const layChiTietPhongVeAction = (maLichChieu) => {
     return async (dispatch) => {
         try{
@@ -28,13 +27,13 @@ export const layChiTietPhongVeAction = (maLichChieu) => {
 export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
     return async dispatch => {
         try{
-            dispatch(showLoadingAction);
+            await dispatch(showLoadingAction);
             const result = await quanLyDatVeService.datVe(thongTinDatVe);
             console.log('result', result.data.content);
             //Đặt vé thành công gọi api load lại phòng vé
             await dispatch(layChiTietPhongVeAction(thongTinDatVe.maLichChieu));
             await dispatch({type: DAT_VE_HOAN_TAT});
-            dispatch({type: CHUYEN_TAB});
+            await dispatch({type: CHUYEN_TAB});
 
             dispatch(hideLoadingAction);
         }catch(error){
