@@ -1,6 +1,5 @@
-import {SET_CHI_TIET_PHIM, SET_HE_THONG_RAP_CHIEU} from '../../actions/types/QuanLyRapType';
-import {quanLyRapService} from '../../../services/QuanLyRapService';
-import { hideLoadingAction, showLoadingAction } from '../LoadingActions';
+import { quanLyRapService } from '../../../services/QuanLyRapService';
+import { SET_CHI_TIET_PHIM, SET_HE_THONG_RAP_CHIEU } from '../../actions/types/QuanLyRapType';
 
 export const layDanhSachHeThongRapAction = () => {
     return async (dispatch) => {
@@ -8,7 +7,7 @@ export const layDanhSachHeThongRapAction = () => {
             const result = await quanLyRapService.layDanhSachHeThongRap();
             console.log('result', result);
 
-            if(result.status === 200) {
+            if (result.status === 200) {
                 dispatch({
                     type: SET_HE_THONG_RAP_CHIEU,
                     heThongRapChieu: result.data.content
@@ -22,7 +21,7 @@ export const layDanhSachHeThongRapAction = () => {
 
 export const layThongTinChiTietPhim = (id) => {
     return async (dispatch) => {
-        try{
+        try {
             let result = await quanLyRapService.layThongTinLichChieuPhim(id);
             console.log('result', result);
 
@@ -30,9 +29,8 @@ export const layThongTinChiTietPhim = (id) => {
                 type: SET_CHI_TIET_PHIM,
                 filmDetail: result.data.content
             })
-        }catch(errors){
+        } catch (errors) {
             console.log('errors', errors.response?.data);
         }
-
     }
 }

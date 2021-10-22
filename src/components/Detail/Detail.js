@@ -21,9 +21,7 @@ export default function Detail(props) {
 
     useEffect(() => {
         let { id } = props.match.params;
-
         dispatch(layThongTinChiTietPhim(id));
-
     }, [])
 
     return (

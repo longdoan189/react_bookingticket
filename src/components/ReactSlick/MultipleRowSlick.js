@@ -32,10 +32,11 @@ function SamplePrevArrow(props) {
 
 const MultipleRowsSlick = (props) => {
 
-  const {dangChieu, sapChieu} = useSelector(state => state.QuanLyPhimReducer);
+  const { dangChieu, sapChieu } = useSelector(state => state.QuanLyPhimReducer);
   const dispatch = useDispatch();
   let activeFilmDC = dangChieu === true ? 'active_Film' : 'none_active_Film';
   let activeFilmSC = sapChieu === true ? 'active_Film' : 'none_active_Film';
+
 
   const renderFilms = () => {
     return props.arrFilm.map((item, index) => {
@@ -62,19 +63,19 @@ const MultipleRowsSlick = (props) => {
   const { t, i18n } = useTranslation();
 
   const handleChange = (value) => {
-      i18n.changeLanguage(value);
+    i18n.changeLanguage(value);
   }
 
   return (
     <div>
-      <button className={`${styleSlick[activeFilmDC]} px-8 py-3 font-semibold rounded bg-gray-800 text-white mr-2`} onClick={() => {
+      <button className={`${styleSlick[activeFilmDC]} px-8 py-3 font-semibold rounded bg-green-500 text-white mr-2`} onClick={() => {
         const action = {
           type: SET_FILM_DANG_CHIEU
         }
         dispatch(action);
       }}>{t('playingmovie')}</button>
-      <button className={`${styleSlick[activeFilmSC]} px-8 py-3 font-semibold rounded border border-gray-800 text-gray-800`} onClick={()=>{
-         const action = {
+      <button className={`${styleSlick[activeFilmSC]} px-8 py-3 font-semibold rounded border border-green-500 text-green-500`} onClick={() => {
+        const action = {
           type: SET_FILM_SAP_CHIEU
         }
         dispatch(action);
@@ -84,7 +85,6 @@ const MultipleRowsSlick = (props) => {
       </Slider>
     </div>
   );
-
 }
 
 export default MultipleRowsSlick;

@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../../../App';
-import { Select } from 'antd';
+import { Select, Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import _ from 'lodash';
 
 //Hook đa ngôn ngữ
@@ -21,6 +22,25 @@ export default function Header(props) {
         i18n.changeLanguage(value);
     }
 
+    const menu = (
+        <Menu>
+            <Menu.Item>
+                <button className="text-blue-800" onClick={() => {
+                    history.push('/profile');
+                }}>Cập nhật thông tin</button>
+            </Menu.Item>
+            <Menu.Item>
+                <button className="text-blue-800" onClick={() => {
+                    localStorage.removeItem(USER_LOGIN);
+                    localStorage.removeItem(TOKEN);
+                    localStorage.removeItem(TOKEN_CYBERSOFT);
+                    history.push('/home');
+                    window.location.reload();
+                }}>Đăng xuất</button>
+            </Menu.Item>
+        </Menu>
+    );
+
     const renderLogin = () => {
         if (_.isEmpty(userLogin)) {
             return <Fragment>
@@ -32,18 +52,24 @@ export default function Header(props) {
                 }}>{t('signup')}</button>
             </Fragment>
         } else {
-            return <Fragment>
-                <button className="self-center px-8 py-3 rounded" onClick={() => {
-                    history.push('/profile');
-                }}>{t("hello.1")} {userLogin.taiKhoan}</button>
-                <button className="text-blue-300 mr-5" onClick={() => {
-                    localStorage.removeItem(USER_LOGIN);
-                    localStorage.removeItem(TOKEN);
-                    localStorage.removeItem(TOKEN_CYBERSOFT);
-                    history.push('/home');
-                    window.location.reload();
-                }}>Đăng xuất</button>
-            </Fragment>
+            return (
+                <Fragment>
+                    <button style={{ pointerEvents: 'none' }} className="self-center mr-3 py-3 rounded" onClick={() => {
+                        history.push('/profile');
+                    }}>
+                        {t("hello.1")}, <span className="text-blue-300 font-medium">{userLogin.taiKhoan}</span>
+                    </button>
+                    <button style={{ pointerEvents: 'none' }}>
+                        <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-blue-400 mx-3">{userLogin.taiKhoan.substr(0, 1)}
+                        </div>
+                    </button>
+                    <Dropdown className="mr-10" overlay={menu}>
+                        <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                            <DownOutlined />
+                        </a>
+                    </Dropdown>
+                </Fragment>
+            )
         }
     }
 

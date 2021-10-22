@@ -1,5 +1,5 @@
-import { DesktopOutlined, FileOutlined, UserOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { DesktopOutlined, FileOutlined, UserOutlined, DownOutlined } from '@ant-design/icons';
+import { Breadcrumb, Layout, Menu, Dropdown } from 'antd';
 import _ from 'lodash';
 import { Fragment, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -19,7 +19,7 @@ export const AdminTemplate = (props) => {
 
     const [collapsed, setCollapsed] = useState(false);
 
-    const onCollapse = () => {
+    const onCollapse = (collapsed) => {
         setCollapsed({ collapsed })
     }
 
@@ -29,29 +29,59 @@ export const AdminTemplate = (props) => {
         }
     })
 
-    if(!localStorage.getItem(USER_LOGIN)){
+    if (!localStorage.getItem(USER_LOGIN)) {
         swal({
             title: "WARNING",
             text: "Bạn không có quyền truy cập vào trang này !!!",
-            buttons:'Đã hiểu',
+            buttons: 'Đã hiểu',
             icon: "error",
         });
         history.push('/');
     }
 
+    if (userLogin.maLoaiNguoiDung !== 'QuanTri') {
+        swal({
+            title: "WARNING",
+            text: "Bạn không có quyền truy cập vào trang này !!!",
+            buttons: 'Đã hiểu',
+            icon: "error",
+        });
+        history.push('/');
+    }
+
+    const menu = (
+        <Menu>
+            <Menu.Item>
+                <button className="text-blue-800" onClick={() => {
+                    history.push('/profile');
+                }}>Cập nhật thông tin</button>
+            </Menu.Item>
+            <Menu.Item>
+                <button className="text-blue-800" onClick={() => {
+                    localStorage.removeItem(USER_LOGIN);
+                    localStorage.removeItem(TOKEN);
+                    localStorage.removeItem(TOKEN_CYBERSOFT);
+                    history.push('/home');
+                    window.location.reload();
+                }}>Đăng xuất</button>
+            </Menu.Item>
+        </Menu>
+    );
+
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ? <Fragment>
-            <button onClick={() => {
-                history.push('/profile');
-            }}> <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 mr-10">{userLogin.taiKhoan.substr(0, 1)}</div>
+            <button className="text-lg" style={{ pointerEvents: 'none' }}>
+                Hello, <span className="text-green-500 font-medium">{userLogin.taiKhoan}</span>
             </button>
-            <button className="text-blue-500 font-bold" onClick={() => {
-                localStorage.removeItem(USER_LOGIN);
-                localStorage.removeItem(TOKEN);
-                localStorage.removeItem(TOKEN_CYBERSOFT);
-                history.push('/home');
-                window.location.reload();
-            }}>Đăng xuất</button>
+            <button style={{ pointerEvents: 'none' }}>
+                <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
+                </div>
+            </button>
+            <Dropdown className="mr-5" overlay={menu}>
+                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <DownOutlined />
+                </a>
+            </Dropdown>
         </Fragment> : ''}
     </Fragment>
 
@@ -60,32 +90,40 @@ export const AdminTemplate = (props) => {
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider collapsible collapsed={collapsed} onCollapse={onCollapse}>
                     <div className="logo p-5">
-                        <img src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="cyberlearn.vn" />
+                        <img style={{ cursor: 'pointer' }} src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="cyberlearn.vn" onClick={() => {
+                            history.push('/');
+                        }} />
                     </div>
                     <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-                        <Menu.Item key="1" icon={<UserOutlined />}>
-                            <NavLink to="/admin/users">Users</NavLink>
-                        </Menu.Item>
-                        <Menu.Item key="2" icon={<FileOutlined />}>
-                            <NavLink to="/admin/films">Films</NavLink>
-                        </Menu.Item>
-                        <Menu.Item key="3" icon={<DesktopOutlined />}>
-                            <NavLink to="/admin/showtimes">Showtimes</NavLink>
-                        </Menu.Item>
+                        <SubMenu key="sub1" icon={<UserOutlined />} title="Users">
+                            <Menu.Item key="1" icon={<UserOutlined />}>
+                                <NavLink to="/admin/users">Users</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="2" icon={<UserOutlined />}>
+                                <NavLink to="/admin/users/addnew">Add New Users</NavLink>
+                            </Menu.Item>
+                        </SubMenu>
+                        <SubMenu key="sub2" icon={<FileOutlined />} title="Films">
+                            <Menu.Item key="3" icon={<FileOutlined />}>
+                                <NavLink to="/admin/films">Films</NavLink>
+                            </Menu.Item>
+                            <Menu.Item key="4" icon={<FileOutlined />}>
+                                <NavLink to="/admin/films/addnew">Add New Films</NavLink>
+                            </Menu.Item>
+                        </SubMenu>
                     </Menu>
                 </Sider>
                 <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{ padding: 0, background:'white' }}>
+                    <Header className="site-layout-background" style={{ padding: 0, background: 'white' }}>
                         <div className="text-right pr-10 pt-1">
                             {operations}
                         </div>
                     </Header>
                     <Content style={{ margin: '0 16px' }}>
                         <Breadcrumb style={{ margin: '16px 0' }}>
-                            {/* <Breadcrumb.Item>User</Breadcrumb.Item>
-                            <Breadcrumb.Item>Bill</Breadcrumb.Item> */}
+
                         </Breadcrumb>
-                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360, background:'white' }}>
+                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360, background: 'white' }}>
                             <Component {...propsRoute} />
                         </div>
                     </Content>

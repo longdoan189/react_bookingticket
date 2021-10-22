@@ -1,14 +1,13 @@
+import { DeleteOutlined, EditOutlined, SearchOutlined, CalendarOutlined } from '@ant-design/icons';
+import { Button, Input, Table } from 'antd';
 import React, { Fragment, useEffect } from 'react';
-import { Button, Table } from 'antd';
-import { Input, Space } from 'antd';
-import { SearchOutlined,EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { layDanhSachPhimAction } from '../../../redux/actions/QuanLyPhimActions';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { history } from '../../../App';
+import { layDanhSachPhimAction, xoaPhimAction } from '../../../redux/actions/QuanLyPhimActions';
 
 const { Search } = Input;
-const onSearch = value => console.log(value);
+
 
 export default function Films(props) {
 
@@ -19,7 +18,7 @@ export default function Films(props) {
 
     useEffect(() => {
         dispatch(layDanhSachPhimAction());
-    }, [])
+    }, []);
 
     const columns = [
         {
@@ -58,15 +57,6 @@ export default function Films(props) {
         {
             title: 'Mô tả phim',
             dataIndex: 'moTa',
-            sorter: (a, b) => {
-                let moTaPhimA = a.moTa.toLowerCase().trim();
-                let moTaPhimB = b.moTa.toLowerCase().trim();
-                if (moTaPhimA > moTaPhimB) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            },
             render: (text, film) => {
                 return <Fragment>
                     {film.moTa.length > 150 ? film.moTa.slice(0, 150) + '...' : film.moTa}
@@ -75,12 +65,17 @@ export default function Films(props) {
             width: '25%'
         },
         {
-            title: 'Hành động',
-            dataIndex: 'hanhDong',
+            title: 'Tác vụ',
+            dataIndex: 'maPhim',
             render: (text, film) => {
                 return <Fragment>
-                    <NavLink className="  mr-2 text-xl p-2" to="/"><EditOutlined style={{color:'green'}} /></NavLink>
-                    <NavLink className="text-xl p-2" to="/"><DeleteOutlined style={{color:'red'}} /></NavLink>
+                    <NavLink key={1} className="mr-2 text-xl p-2" to={`/admin/films/edit/${film.maPhim}`}><EditOutlined style={{ color: 'green' }} /></NavLink>
+                    <span key={2} style={{ cursor: 'pointer' }} className="text-xl p-2" onClick={() => {
+                        if (window.confirm('Bạn có muốn xóa phim ' + film.tenPhim + ' không ?')) {
+                            dispatch(xoaPhimAction(film.maPhim));
+                        }
+                    }}><DeleteOutlined style={{ color: 'red' }} /></span>
+                    <NavLink key={3} className="ml-2 text-xl p-2" to={`/admin/films/showtimes/${film.maPhim}/${film.tenPhim}`}><CalendarOutlined style={{ color: 'blue' }} /></NavLink>
                 </Fragment>
             },
             width: '20%'
@@ -90,21 +85,28 @@ export default function Films(props) {
     const data = arrFilmDefault;
 
     function onChange(pagination, filters, sorter, extra) {
-        console.log('params', pagination, filters, sorter, extra);
+        // console.log('params', pagination, filters, sorter, extra);
+    }
+
+    const onSearch = value => {
+        console.log(value);
+        dispatch(layDanhSachPhimAction(value));
     }
 
     return (
         <div>
             <h3 className="text-4xl">Quản Lý Phim</h3>
-            <Button className="mb-5">Thêm phim</Button>
+            <Button type="dashed" className="mb-5" onClick={() => {
+                history.push('/admin/films/addnew');
+            }}>Thêm phim</Button>
             <Search
                 className="mb-5"
-                placeholder="input search text"
+                placeholder="Tìm kiếm phim...."
                 enterButton={<SearchOutlined />}
                 size="large"
                 onSearch={onSearch}
             />
-            <Table columns={columns} dataSource={data} onChange={onChange} />
+            <Table columns={columns} dataSource={data} onChange={onChange} rowKey={'maPhim'} />
         </div>
     )
 }

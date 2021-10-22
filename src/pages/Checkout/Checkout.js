@@ -8,7 +8,9 @@ import { CloseCircleOutlined, UserOutlined, CheckOutlined, TeamOutlined, HomeOut
 import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
 import { datVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
-import { Tabs } from 'antd';
+import { Tabs, BackTop, Menu, Dropdown } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
+
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import moment from 'moment';
 import { history } from '../../App';
@@ -52,7 +54,7 @@ function Checkout(props) {
                 classGheDaDuocDat = 'gheDaDuocDat';
             }
 
-            if (indexGheDD != -1) {
+            if (indexGheDD !== -1) {
                 classGheDangDat = 'gheDangDat';
             }
 
@@ -196,23 +198,54 @@ export default function (props) {
                 number: '1'
             })
         }
-    }, [])
+    }, []);
+
+    const menu = (
+        <Menu>
+            <Menu.Item>
+                <button className="text-blue-800" onClick={() => {
+                    history.push('/profile');
+                }}>Cập nhật thông tin</button>
+            </Menu.Item>
+            <Menu.Item>
+                <button className="text-blue-800" onClick={() => {
+                    localStorage.removeItem(USER_LOGIN);
+                    localStorage.removeItem(TOKEN);
+                    localStorage.removeItem(TOKEN_CYBERSOFT);
+                    history.push('/home');
+                    window.location.reload();
+                }}>Đăng xuất</button>
+            </Menu.Item>
+        </Menu>
+    );
 
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ? <Fragment>
-            <button onClick={() => {
-                history.push('/profile');
-            }}> <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 ml-5">{userLogin.taiKhoan.substr(0, 1)}</div>Hello {userLogin.taiKhoan} !
+            <button className="text-lg" style={{pointerEvents:'none'}}>
+                Hello, <span className="text-green-500 font-medium">{userLogin.taiKhoan}</span>
             </button>
-            <button className="text-blue-800" onClick={() => {
-                localStorage.removeItem(USER_LOGIN);
-                localStorage.removeItem(TOKEN);
-                localStorage.removeItem(TOKEN_CYBERSOFT);
-                history.push('/home');
-                window.location.reload();
-            }}>Đăng xuất</button>
+            <button style={{pointerEvents:'none'}}>
+                <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
+                </div>
+            </button>
+            <Dropdown className="mr-5" overlay={menu}>
+                <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    <DownOutlined />
+                </a>
+            </Dropdown>
         </Fragment> : ''}
     </Fragment>
+
+    const style = {
+        height: 40,
+        width: 40,
+        lineHeight: '40px',
+        borderRadius: 4,
+        backgroundColor: '#1088e9',
+        color: '#fff',
+        textAlign: 'center',
+        fontSize: 14,
+    };
 
     return <div className="p-5">
         <Tabs tabBarExtraContent={operations} defaultActiveKey="1" activeKey={activeTab} onChange={(key) => {
@@ -234,6 +267,11 @@ export default function (props) {
             </div>} key="3">
             </TabPane>
         </Tabs>
+        <>
+            <BackTop>
+                <div style={style}>UP</div>
+            </BackTop>
+        </>
     </div>
 }
 
@@ -247,7 +285,7 @@ export function KetQuaDatVe(props) {
     useEffect(() => {
         const action = layThongTinNguoiDungAction();
         dispatch(action);
-    }, [])
+    }, []);
 
     console.log('thongTinNguoiDung', thongTinNguoiDung);
 
