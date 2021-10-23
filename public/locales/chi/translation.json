@@ -31,7 +31,7 @@
     "phone_number": "電話號碼",
     "retype_password": "重新輸入密碼",
     "have_account": "已經有賬戶？",
-    "required": "必需的",
+    "required": "*必需的",
     "valid_email": "輸入有效的電子郵件",
     "pwlt8": "密碼必須至少有 8 個字符",
     "phonenumberMin": "电话号码必须至少有 10 个号码",

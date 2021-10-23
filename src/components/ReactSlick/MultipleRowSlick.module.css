@@ -8,9 +8,9 @@
 }
 
 .active_Film {
-   @apply bg-gray-800 text-white;
+   @apply bg-green-500 text-white;
 }
 
 .none_active_Film {
-   @apply bg-white text-gray-800 border border-gray-800;
+   @apply bg-white text-green-500 border border-green-500;
 }
