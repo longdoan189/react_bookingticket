@@ -95,6 +95,7 @@ export function ThongTinCaNhan(props) {
             onValuesChange={onFormLayoutChange}
             size={componentSize}
         >
+            <h3 className="text-3xl text-center my-10 text-blue-500 font-medium">THÔNG TIN CÁ NHÂN</h3>
             <Form.Item label="Form Size" name="size">
                 <Radio.Group>
                     <Radio.Button value="small">Small</Radio.Button>

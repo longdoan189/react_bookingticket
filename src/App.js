@@ -1,5 +1,5 @@
 import { createBrowserHistory } from 'history';
-import { Router, Switch } from 'react-router';
+import { Route, Router, Switch } from 'react-router';
 import './App.css';
 import Detail from './components/Detail/Detail';
 import Loading from './components/Loading/Loading';
@@ -22,6 +22,7 @@ import { CheckoutTemplate } from './templates/CheckoutTemplate/CheckoutTemplate'
 import { HomeTemplate } from './templates/HomeTemplate/HomeTemplate';
 import { UserTemplate } from './templates/UserTemplate/UserTemplate';
 import EditUsers from './pages/Admin/Users/EditUsers/EditUsers';
+import PageNotFound from './pages/PageNotFound/PageNotFound';
 
 
 export const history = createBrowserHistory();
@@ -52,6 +53,7 @@ function App() {
         <AdminTemplate path="/admin/users/edit/:taikhoan" exact Component={EditUsers} />
 
         <HomeTemplate path="/" exact Component={Home} />
+        <PageNotFound path="*" exact Component={PageNotFound} />
       </Switch>
     </Router>
   );

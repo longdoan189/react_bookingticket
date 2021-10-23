@@ -98,19 +98,19 @@ export default function Header(props) {
                         <Option value="en">
                             <div className="flex flex-row justify-between">
                                 <span className="text-base">EN</span>
-                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" style={{ width: 25, height: 25 }} />
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Flag_of_the_United_Kingdom.svg/1280px-Flag_of_the_United_Kingdom.svg.png" style={{ width: 25, height: 25 }} />
                             </div>
                         </Option>
                         <Option value="chi">
                             <div className="flex flex-row justify-between">
                                 <span className="text-base">CN</span>
-                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/cn.svg" style={{ width: 25, height: 25 }} />
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/225px-Flag_of_the_People%27s_Republic_of_China.svg.png" style={{ width: 25, height: 25 }} />
                             </div>
                         </Option>
                         <Option value="vi">
                             <div className="flex flex-row justify-between">
                                 <span className="text-base">VN</span>
-                                <img src="https://lipis.github.io/flag-icon-css/flags/4x3/vn.svg" style={{ width: 25, height: 25 }} />
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Flag_of_Vietnam.svg/225px-Flag_of_Vietnam.svg.png" style={{ width: 25, height: 25 }} />
                             </div>
                         </Option>
                     </Select>
@@ -122,6 +122,5 @@ export default function Header(props) {
                 </button>
             </div>
         </header>
-
     )
 }
