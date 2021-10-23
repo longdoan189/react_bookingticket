@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Table, Tooltip } from 'antd';
 import { Input, Button } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ import { GROUPID } from '../../../util/settings/config';
 import { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../../App';
+import ReactHtmlParser from 'react-html-parser';
 
 export default function Users(props) {
 
@@ -22,12 +23,15 @@ export default function Users(props) {
         dispatch(layDanhSachNguoiDungAction());
     }, []);
 
+
     const columns = [
         {
             title: 'STT',
             dataIndex: 'stt',
-            render: (user, index) => {
-                return <span key={index}>{user}</span>
+            key: 'stt',
+            render: (text, record, index) => {
+                let stt = ReactHtmlParser(index+1);
+                return <div>{stt}</div>
             }
         },
         {
@@ -63,18 +67,22 @@ export default function Users(props) {
         {
             title: 'Tác vụ',
             dataIndex: 'tacVu',
-            render: (text, user) => {
+            render: (text,user) => {
                 return <Fragment>
-                    <NavLink className="mr-2 text-xl p-2" to={`/admin/users/edit/${user.taiKhoan}`}>
-                        <EditOutlined style={{ color: 'green' }} />
-                    </NavLink>
-                    <span className="text-xl p-2">
-                        <DeleteOutlined style={{ color: 'red' }} onClick={() => {
-                            if (window.confirm(`Bạn có chắc muốn xóa tài khoản ${user.taiKhoan} không ?`)) {
-                                dispatch(xoaNguoiDungAction(user.taiKhoan));
-                            }
-                        }} />
-                    </span>
+                    <Tooltip title="Cập nhật người dùng">
+                        <NavLink className="mr-2 text-xl p-2" to={`/admin/users/edit/${user.taiKhoan}`}>
+                            <EditOutlined style={{ color: 'green' }} />
+                        </NavLink>
+                    </Tooltip>
+                    <Tooltip title="Xóa người dùng">
+                        <span className="text-xl p-2">
+                            <DeleteOutlined style={{ color: 'red' }} onClick={() => {
+                                if (window.confirm(`Bạn có chắc muốn xóa tài khoản ${text.taiKhoan} không ?`)) {
+                                    dispatch(xoaNguoiDungAction(user.taiKhoan));
+                                }
+                            }} />
+                        </span>
+                    </Tooltip>
                 </Fragment>
             }
         }

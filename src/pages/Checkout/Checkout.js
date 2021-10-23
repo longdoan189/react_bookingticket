@@ -9,7 +9,7 @@ import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
 import { datVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import { Tabs, BackTop, Menu, Dropdown } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined, UpSquareOutlined } from '@ant-design/icons';
 
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import moment from 'moment';
@@ -221,10 +221,10 @@ export default function (props) {
 
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ? <Fragment>
-            <button className="text-lg" style={{pointerEvents:'none'}}>
+            <button className="text-lg" style={{ pointerEvents: 'none' }}>
                 Hello, <span className="text-green-500 font-medium">{userLogin.taiKhoan}</span>
             </button>
-            <button style={{pointerEvents:'none'}}>
+            <button style={{ pointerEvents: 'none' }}>
                 <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
                 </div>
             </button>
@@ -237,14 +237,10 @@ export default function (props) {
     </Fragment>
 
     const style = {
-        height: 40,
-        width: 40,
-        lineHeight: '40px',
-        borderRadius: 4,
+        borderRadius: '8px',
         backgroundColor: '#1088e9',
         color: '#fff',
-        textAlign: 'center',
-        fontSize: 14,
+        fontSize: 50,
     };
 
     return <div className="p-5">
@@ -269,7 +265,7 @@ export default function (props) {
         </Tabs>
         <>
             <BackTop>
-                <div style={style}>UP</div>
+                <UpSquareOutlined style={style} />
             </BackTop>
         </>
     </div>

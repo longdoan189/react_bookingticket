@@ -1,5 +1,5 @@
 import { DeleteOutlined, EditOutlined, SearchOutlined, CalendarOutlined } from '@ant-design/icons';
-import { Button, Input, Table } from 'antd';
+import { Button, Input, Table, Tooltip } from 'antd';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
@@ -69,13 +69,19 @@ export default function Films(props) {
             dataIndex: 'maPhim',
             render: (text, film) => {
                 return <Fragment>
-                    <NavLink key={1} className="mr-2 text-xl p-2" to={`/admin/films/edit/${film.maPhim}`}><EditOutlined style={{ color: 'green' }} /></NavLink>
-                    <span key={2} style={{ cursor: 'pointer' }} className="text-xl p-2" onClick={() => {
-                        if (window.confirm('Bạn có muốn xóa phim ' + film.tenPhim + ' không ?')) {
-                            dispatch(xoaPhimAction(film.maPhim));
-                        }
-                    }}><DeleteOutlined style={{ color: 'red' }} /></span>
-                    <NavLink key={3} className="ml-2 text-xl p-2" to={`/admin/films/showtimes/${film.maPhim}/${film.tenPhim}`}><CalendarOutlined style={{ color: 'blue' }} /></NavLink>
+                    <Tooltip title="Cập nhật phim">
+                        <NavLink key={1} className="mr-2 text-xl p-2" to={`/admin/films/edit/${film.maPhim}`}><EditOutlined style={{ color: 'green' }} /></NavLink>
+                    </Tooltip>
+                    <Tooltip title="Xóa phim">
+                        <span key={2} style={{ cursor: 'pointer' }} className="text-xl p-2" onClick={() => {
+                            if (window.confirm('Bạn có muốn xóa phim ' + film.tenPhim + ' không ?')) {
+                                dispatch(xoaPhimAction(film.maPhim));
+                            }
+                        }}><DeleteOutlined style={{ color: 'red' }} /></span>
+                    </Tooltip>
+                    <Tooltip title="Tạo lịch chiếu">
+                        <NavLink key={3} className="ml-2 text-xl p-2" to={`/admin/films/showtimes/${film.maPhim}/${film.tenPhim}`}><CalendarOutlined style={{ color: 'blue' }} /></NavLink>
+                    </Tooltip>
                 </Fragment>
             },
             width: '20%'
