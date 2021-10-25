@@ -39,5 +39,14 @@
     "match_password": "密碼必須匹配",
     "valid_number": "輸入有效的電話號碼",
     "only_character": "只允許拉丁字符",
-    "register_success": "註冊成功!"
+    "register_success": "註冊成功!",
+    "title": "標題",
+    "message": "信息",
+    "subject": "標題",
+    "lt75c": "標題必須少於 75 個字符 ",
+    "sending": "發送...",
+    "sent": "發送!",
+    "send": "發送",
+    "contact_us_here": "在這里聯系我們！",
+    "contact_admin": "直接聯繫管理員"
 }

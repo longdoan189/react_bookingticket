@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import { FileOutlined, UserOutlined } from '@ant-design/icons';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserOutlined, FileOutlined } from '@ant-design/icons';
 
 
 export default function Dashboard(props) {
@@ -33,8 +33,6 @@ export default function Dashboard(props) {
 						</div>
 					</div>
 				</div>
-
-				<img src="https://source.unsplash.com/random/480x320" alt="" className="w-5/6 mx-auto mb-12 -mt-20 rounded-lg shadow-md lg:-mt-40 bg-coolGray-500" />
 			</section>
 		</div>
 	)

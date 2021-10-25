@@ -2,7 +2,6 @@ import swal from 'sweetalert';
 import { history } from "../../App";
 import { SET_THONG_TIN_NGUOI_DUNG } from '../../redux/actions/types/QuanLyNguoiDungType';
 import { quanLyNguoiDungService } from "../../services/QuanLyNguoiDungService";
-import { hideLoadingAction, showLoadingAction } from "./LoadingActions";
 import { DANG_KY_ACTION, DANG_NHAP_ACTION, LAY_THONG_TIN_TAI_KHOAN, SET_DANH_SACH_NGUOI_DUNG, THEM_NGUOI_DUNG } from "./types/QuanLyNguoiDungType";
 
 
@@ -65,7 +64,6 @@ export const dangKyAction = (thongTinDangKy) => {
 export const layThongTinNguoiDungAction = (taiKhoan) => {
     return async (dispatch) => {
         try {
-            await dispatch(showLoadingAction);
             const result = await quanLyNguoiDungService.layThongTinNguoiDung(taiKhoan);
 
             if (result.data.statusCode === 200) {
@@ -75,11 +73,8 @@ export const layThongTinNguoiDungAction = (taiKhoan) => {
                 })
             }
             console.log(result);
-            dispatch(hideLoadingAction);
-
         }
         catch (error) {
-            dispatch(hideLoadingAction);
             console.log('error', error.response.data);
         }
     }

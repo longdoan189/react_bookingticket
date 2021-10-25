@@ -39,5 +39,14 @@
     "match_password": "Password must match",
     "valid_number": "Enter a valid phone number",
     "only_character": "Only alphabetic character allowed",
-    "register_success": "Registered successfully!"
+    "register_success": "Registered successfully!",
+    "title": "Title",
+    "message": "Message",
+    "subject": "Subject",
+    "lt75c": "Subject must be less than 75 characters",
+    "sending": "Sending...",
+    "sent": "Sent!",
+    "send": "Send",
+    "contact_us_here": "Contact us here!",
+    "contact_admin": "Contact admin directly"
 }

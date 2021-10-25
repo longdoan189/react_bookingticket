@@ -77,7 +77,7 @@ export default function Users(props) {
                     <Tooltip title="Xóa người dùng">
                         <span className="text-xl p-2">
                             <DeleteOutlined style={{ color: 'red' }} onClick={() => {
-                                if (window.confirm(`Bạn có chắc muốn xóa tài khoản ${text.taiKhoan} không ?`)) {
+                                if (window.confirm(`Bạn có chắc muốn xóa tài khoản ${text?.taiKhoan} không ?`)) {
                                     dispatch(xoaNguoiDungAction(user.taiKhoan));
                                 }
                             }} />

@@ -1,21 +1,18 @@
-import React, { Fragment, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import style from './Checkout.module.css';
+import { CheckOutlined, CloseCircleOutlined, DownOutlined, HomeOutlined, TeamOutlined, UpSquareOutlined, UserOutlined } from '@ant-design/icons';
+import { BackTop, Dropdown, Menu, Tabs, Tooltip } from 'antd';
 import _ from 'lodash';
-import { layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeAction';
-import './Checkout.css';
-import { CloseCircleOutlined, UserOutlined, CheckOutlined, TeamOutlined, HomeOutlined } from '@ant-design/icons';
-import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
-import { datVeAction } from '../../redux/actions/QuanLyDatVeAction';
-import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
-import { Tabs, BackTop, Menu, Dropdown } from 'antd';
-import { DownOutlined, UpSquareOutlined } from '@ant-design/icons';
-
-import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import moment from 'moment';
-import { history } from '../../App';
-import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from '../../util/settings/config';
+import React, { Fragment, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { history } from '../../App';
+import { datVeAction, layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeAction';
+import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
+import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
+import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from '../../util/settings/config';
+import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
+import './Checkout.css';
+import style from './Checkout.module.css';
 
 
 function Checkout(props) {
@@ -39,10 +36,11 @@ function Checkout(props) {
         return danhSachGhe.map((ghe, index) => {
             let classGheVip = ghe.loaiGhe === 'Vip' ? 'gheVip' : ''
             let classGheDaDat = ghe.daDat === true ? 'gheDaDat' : ''
-
+            //Kiểm tra từng ghế render xem có trong mảng ghế đang đặt hay không
             let classGheDangDat = '';
             let indexGheDD = danhSachGheDangDat.findIndex(gheDD => gheDD.maGhe === ghe.maGhe);
 
+            //Kiểm tra từng ghế render xem có trong mảng ghế khách đang đặt hay không
             let classGheKhachDat = '';
             let indexGheKD = danhSachGheKhachDat.findIndex(gheKD => gheKD.maGhe === ghe.maGhe);
             if (indexGheKD !== -1) {
@@ -63,7 +61,7 @@ function Checkout(props) {
                     dispatch({
                         type: DAT_VE,
                         gheDuocChon: ghe
-                    })
+                    });
                 }} disabled={ghe.daDat || classGheKhachDat !== ''} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat} text-center`} key={index}>
                     {ghe.daDat ? classGheDaDuocDat !== '' ? <UserOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : <CloseCircleOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : classGheKhachDat ? <TeamOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : ghe.stt}
                 </button>
@@ -222,10 +220,10 @@ export default function (props) {
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ? <Fragment>
             <button className="text-lg" style={{ pointerEvents: 'none' }}>
-                Hello, <span className="text-green-500 font-medium">{userLogin.taiKhoan}</span>
+                Hello, <span className="text-blue-300 font-medium">{userLogin.taiKhoan}</span>
             </button>
             <button style={{ pointerEvents: 'none' }}>
-                <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
+                <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-blue-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
                 </div>
             </button>
             <Dropdown className="mr-5" overlay={menu}>
@@ -258,7 +256,9 @@ export default function (props) {
             </TabPane>
             <TabPane tab={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <NavLink to="/home">
-                    <HomeOutlined style={{ fontSize: 25, marginLeft: 15 }} />
+                    <Tooltip title="Trang chủ" placement="bottom">
+                        <HomeOutlined style={{ fontSize: 25, marginLeft: 15 }} />
+                    </Tooltip>
                 </NavLink>
             </div>} key="3">
             </TabPane>
