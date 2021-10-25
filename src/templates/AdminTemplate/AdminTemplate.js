@@ -71,10 +71,10 @@ export const AdminTemplate = (props) => {
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ? <Fragment>
             <button className="text-lg" style={{ pointerEvents: 'none' }}>
-                Hello, <span className="text-green-500 font-medium">{userLogin.taiKhoan}</span>
+                Hello, <span className="text-blue-300 font-medium">{userLogin.taiKhoan}</span>
             </button>
             <button style={{ pointerEvents: 'none' }}>
-                <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-green-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
+                <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-blue-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
                 </div>
             </button>
             <Dropdown className="mr-5" overlay={menu}>

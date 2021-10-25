@@ -39,5 +39,14 @@
     "match_password": "Mật khẩu xác nhận không chính xác",
     "valid_number": "Số điện thoại hợp lệ",
     "only_character": "Chỉ được nhập kí tự chữ",
-    "register_success": "Đăng ký thành công!"
+    "register_success": "Đăng ký thành công!",
+    "title": "Tiêu đề",
+    "message": "Nội dung",
+    "subject": "Tiêu đề",
+    "lt75c": "Tiêu đề chỉ được tối đa 75 kí tự",
+    "sending": "Đang gửi...",
+    "sent": "Đã gửi!",
+    "send": "Gửi",
+    "contact_us_here": "Liên hệ chúng tôi tại đây!",
+    "contact_admin": "Liên hệ trực tiếp quản trị viên"
 }
