@@ -168,9 +168,9 @@ export function DanhGia(props) {
     return <div>
         <div className="mx-32 mt-10">
             <div style={{ position: 'absolute', right: '430px', bottom: '41.5%', zIndex: 10 }}>
-                <Rate tooltips={desc} onChange={handleChangeRate} value={`${filmDetail.danhGia}`} />
+                <Rate tooltips={desc} onChange={handleChangeRate} value={`${filmDetail.danhGia/2}`} />
             </div>
-            <div style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'absolute', zIndex: 10, marginLeft: '10%' }} className="text-2xl rounded-full bg-blue-400 mt-1.5">{userLogin.taiKhoan ? userLogin.taiKhoan.substr(0, 1) : <UserOutlined />}
+            <div style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'absolute', zIndex: 10, marginLeft: '10%' }} className="text-2xl rounded-full bg-blue-400 mt-1.5">{userLogin.taiKhoan ? userLogin.taiKhoan.substr(0, 1).toUpperCase() : <UserOutlined />}
             </div>
             <div style={{ width: 520, background: 'transparent', position: 'relative', zIndex: 1, cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '15%' }} className="border rounded border-white" onClick={() => setModal2Visible(true)}>
                 <p style={{ marginRight: '45%' }} className="font-semibold pt-3.5">Bạn nghĩ gì về phim này?</p>
@@ -183,7 +183,7 @@ export function DanhGia(props) {
                 onCancel={() => setModal2Visible(false)}
             >
                 <p className="text-green-400 text-5xl font-medium text-center mb-1">{filmDetail.danhGia.toFixed(1)}</p>
-                <Rate style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 30, marginBottom: '20px' }} tooltips={desc} onChange={handleChangeRate} value={`${filmDetail.danhGia}`} />
+                <Rate style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 30, marginBottom: '20px' }} tooltips={desc} onChange={handleChangeRate} allowHalf value={`${filmDetail.danhGia/2}`} />
                 <TextArea placeholder="Nói cho mọi người biết bạn nghĩ gì về phim này..." allowClear onChange={onChange} />
             </Modal>
         </div>

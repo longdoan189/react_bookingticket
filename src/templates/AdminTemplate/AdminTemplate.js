@@ -74,7 +74,7 @@ export const AdminTemplate = (props) => {
                 Hello, <span className="text-blue-300 font-medium">{userLogin.taiKhoan}</span>
             </button>
             <button style={{ pointerEvents: 'none' }}>
-                <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-blue-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
+                <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-blue-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1).toUpperCase()}
                 </div>
             </button>
             <Dropdown className="mr-5" overlay={menu}>

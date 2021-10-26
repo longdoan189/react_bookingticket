@@ -23,10 +23,16 @@ export const dangNhapAction = (thongTinDangNhap) => {
                 //Chuyển hướng đăng nhập về home khi đăng nhập thành công
                 history.push('/');
             }
-
+            
             console.log('result', result);
         } catch (error) {
             console.log('error', error.response);
+            swal({
+                title: "ERROR",
+                text: "Tài khoản hoặc mật khẩu không đúng !!!",
+                buttons: 'OK',
+                icon: "error",
+            });
         }
     }
 }
@@ -171,7 +177,7 @@ export const layThongTinTaiKhoanAction = (taiKhoan) => {
 
 export const capNhatTaiKhoanAction = (user) => {
     return async (dispatch) => {
-        try{
+        try {
             const result = await quanLyNguoiDungService.capNhatTaiKhoan(user);
             console.log('result', result.data.content);
 
@@ -180,8 +186,8 @@ export const capNhatTaiKhoanAction = (user) => {
                 icon: "success",
             });
 
-        }catch(errors){
-            console.log('errors',errors.response?.data);
+        } catch (errors) {
+            console.log('errors', errors.response?.data);
         }
     }
 }
