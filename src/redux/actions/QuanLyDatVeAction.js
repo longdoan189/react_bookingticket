@@ -35,10 +35,10 @@ export const datVeAction = (thongTinDatVe = new ThongTinDatVe()) => {
             await dispatch(layChiTietPhongVeAction(thongTinDatVe.maLichChieu));
             await dispatch({ type: DAT_VE_HOAN_TAT });
             await dispatch({ type: CHUYEN_TAB });
-            await dispatch(hideLoadingAction);
-
+            
             let userLogin = getState().QuanLyNguoiDungReducer.userLogin;
-            connection.invoke("datGheThanhCong", userLogin.taiKhoan, thongTinDatVe.maLichChieu)
+            await connection.invoke("datGheThanhCong", userLogin.taiKhoan, thongTinDatVe.maLichChieu)
+            dispatch(hideLoadingAction);
         } catch (error) {
             dispatch(hideLoadingAction);
             console.log('error', error.response.data);
@@ -65,6 +65,6 @@ export const datGheAction = (ghe, maLichChieu) => {
         danhSachGheDangDat = JSON.stringify(danhSachGheDangDat);
 
         //Call api signalR
-        // connection.invoke('datGhe', taiKhoan, danhSachGheDangDat, maLichChieu);
+        connection.invoke('datGhe', taiKhoan, danhSachGheDangDat, maLichChieu);
     }
 }
