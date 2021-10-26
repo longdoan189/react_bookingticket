@@ -14,7 +14,7 @@ import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from '../../util/settings/config';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import './Checkout.css';
 import style from './Checkout.module.css';
-import { reduce } from 'lodash';
+
 
 
 function Checkout(props) {
@@ -44,7 +44,7 @@ function Checkout(props) {
             dsGheKhachDat = dsGheKhachDat.filter(item => item.taiKhoan !== userLogin.taiKhoan);
 
             //Gộp ds ghế ở tất cả server thành 1 mảng chung
-            let arrGheKhachDat = reduce((result, item, index) => {
+            let arrGheKhachDat = dsGheKhachDat.reduce((result, item, index) => {
                 let arrGhe = JSON.parse(item.danhSachGhe);
                 return [...result, ...arrGhe];
             }, []);
