@@ -6,7 +6,7 @@ import { CHANGE_TAB, CHUYEN_TAB, DAT_VE, DAT_VE_HOAN_TAT, SET_CHI_TIET_PHONG_VE 
 const stateDefault = {
     chiTietPhongVe: new ThongTinLichChieu(),
     danhSachGheDangDat: [],
-    danhSachGheKhachDat: [{maGhe: 70768},{maGhe: 70769}],
+    danhSachGheKhachDat: [{maGhe: 53961},{maGhe: 53962}],
     activeTab: '1'
 }
 
@@ -43,6 +43,11 @@ export const QuanLyDatVeReducer = (state = stateDefault, action) => {
 
         case CHANGE_TAB: {
             state.activeTab = action.number;
+            return {...state}
+        }
+
+        case 'DAT_GHE': {
+            state.danhSachGheKhachDat = action.arrGheKhachDat;
             return {...state}
         }
 

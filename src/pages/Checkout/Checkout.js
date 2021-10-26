@@ -5,14 +5,16 @@ import moment from 'moment';
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { connection } from '../../index';
 import { history } from '../../App';
-import { datVeAction, layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeAction';
+import { datGheAction, datVeAction, layChiTietPhongVeAction } from '../../redux/actions/QuanLyDatVeAction';
 import { layThongTinNguoiDungAction } from '../../redux/actions/QuanLyNguoiDungAction';
 import { CHANGE_TAB, DAT_VE } from '../../redux/actions/types/QuanLyDatVeType';
 import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from '../../util/settings/config';
 import { ThongTinDatVe } from '../../_core/models/ThongTinDatVe';
 import './Checkout.css';
 import style from './Checkout.module.css';
+import { reduce } from 'lodash';
 
 
 function Checkout(props) {
@@ -26,7 +28,50 @@ function Checkout(props) {
     useEffect(() => {
         const action = layChiTietPhongVeAction(props.match.params.id);
         dispatch(action);
+
+        //Có 1 client đặt vé thành công sẽ load lại danh sách phòng vé của lịch chiếu đó
+        connection.on("datVeThanhCong", () => {
+            dispatch(action);
+        });
+
+        //Vừa vào trang load tất cả danh sách ghế người khác đang đặt
+        connection.invoke("loadDanhSachGhe",props.match.params.id);
+
+        //Load danh sách ghế đang đặt từ server về (lắng nghe tín hiệu từ server trả về)
+        connection.on('loadDanhSachGheDaDat', (dsGheKhachDat) => {
+            console.log('danhSachGheKhachDat', dsGheKhachDat);
+            //Loại mình ra khỏi danh sách
+            dsGheKhachDat = dsGheKhachDat.filter(item => item.taiKhoan !== userLogin.taiKhoan);
+
+            //Gộp ds ghế ở tất cả server thành 1 mảng chung
+            let arrGheKhachDat = reduce((result, item, index) => {
+                let arrGhe = JSON.parse(item.danhSachGhe);
+                return [...result, ...arrGhe];
+            }, []);
+
+            //Đưa dữ liệu ghế kahch1 đặt cập nhật lên reducer
+            arrGheKhachDat = _.uniqBy(arrGheKhachDat, 'maGhe');
+            // console.log('arrGheKhachDat',arrGheKhachDat);
+
+            dispatch({
+                type: 'DAT_GHE',
+                arrGheKhachDat
+            })
+        });
+
+        //Cài đặt sự kiện khi reload trang
+        window.addEventListener("beforeunload", clearGhe);
+
+        return () => {
+            clearGhe();
+            window.removeEventListener("beforeunload", clearGhe);
+        }
+
     }, []);
+
+    const clearGhe = function (event) {
+        connection.invoke('huyDat', userLogin.taiKhoan, props.match.params.id);
+    }
 
     console.log('chiTietPhongVe', chiTietPhongVe);
 
@@ -58,10 +103,7 @@ function Checkout(props) {
 
             return <Fragment key={index}>
                 <button onClick={() => {
-                    dispatch({
-                        type: DAT_VE,
-                        gheDuocChon: ghe
-                    });
+                    dispatch(datGheAction(ghe, props.match.params.id));
                 }} disabled={ghe.daDat || classGheKhachDat !== ''} className={`ghe ${classGheVip} ${classGheDaDat} ${classGheDangDat} ${classGheDaDuocDat} ${classGheKhachDat} text-center`} key={index}>
                     {ghe.daDat ? classGheDaDuocDat !== '' ? <UserOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : <CloseCircleOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : classGheKhachDat ? <TeamOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /> : ghe.stt}
                 </button>
