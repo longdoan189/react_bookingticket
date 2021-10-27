@@ -79,7 +79,7 @@ const Contact = () => {
     arrAdmins = arrAdmins.slice(0, 6);
 
     return (
-        <div className='pt-32 pl-16 grid grid-cols-2 gap-2'>
+        <div className='pt-32 pl-16 grid grid-cols-2 gap-2 mb-10'>
             <form className="w-full" onSubmit={handleSubmit(onSubmit)} noValidate>
                 <h1 className='text-3xl'>{t("contact_us_here")}</h1>
                 <div className='grid grid-cols-2 gap-4'>

@@ -19,7 +19,6 @@ export const HomeTemplate = (props) => {
         return <Fragment>
             <Header {...propsRoute} />
             <Component {...propsRoute} />
-            <hr className="mt-5" />
             <Footer {...propsRoute} />
         </Fragment>
     }} />
