@@ -62,7 +62,12 @@ export const dangKyAction = (thongTinDangKy) => {
 
             console.log('result', result);
         } catch (error) {
-            console.log('error', error.response);
+            console.log('error', error.response?.data);
+            swal({
+                title: `${error.response.data.content}`,
+                buttons: 'OK',
+                icon: "error",
+            });
         }
     }
 }

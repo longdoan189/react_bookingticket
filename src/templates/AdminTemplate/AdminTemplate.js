@@ -51,12 +51,12 @@ export const AdminTemplate = (props) => {
 
     const menu = (
         <Menu>
-            <Menu.Item>
+            <Menu.Item key="1">
                 <button className="text-blue-800" onClick={() => {
                     history.push('/profile');
                 }}>Cập nhật thông tin</button>
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item key="2">
                 <button className="text-blue-800" onClick={() => {
                     localStorage.removeItem(USER_LOGIN);
                     localStorage.removeItem(TOKEN);

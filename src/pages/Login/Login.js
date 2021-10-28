@@ -21,7 +21,6 @@ export default function Login(props) {
 
     const dispatch = useDispatch();
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
-    console.log('userLogin', userLogin);
 
     const formik = useFormik({
         initialValues: {
@@ -31,8 +30,6 @@ export default function Login(props) {
         onSubmit: values => {
             const action = dangNhapAction(values);
             dispatch(action);
-
-            console.log('values', values);
         }
     });
 
