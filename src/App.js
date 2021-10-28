@@ -1,5 +1,5 @@
 import { createBrowserHistory } from 'history';
-import { Route, Router, Switch } from 'react-router';
+import { Router, Switch } from 'react-router';
 import './App.css';
 import Detail from './components/Detail/Detail';
 import Loading from './components/Loading/Loading';
