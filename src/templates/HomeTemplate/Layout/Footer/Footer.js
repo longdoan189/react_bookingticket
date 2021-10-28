@@ -32,7 +32,7 @@ export default function Footer(props) {
                         <p className="pb-1 text-lg font-medium">{t('partner')}</p>
                         <div className="grid grid-cols-3">
                             {arrHeThongRap.map((htr, index) => {
-                                return <div key={index}>
+                                return <div key={index} className="hover:opacity-50">
                                     <img src={htr.logo} className="w-full mt-5" style={{width:30, cursor:'pointer'}} />
                                 </div>
                             })}

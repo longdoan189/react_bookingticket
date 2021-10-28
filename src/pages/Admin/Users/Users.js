@@ -18,6 +18,7 @@ export default function Users(props) {
     console.log('arrUsers', arrUsers);
 
     const dispatch = useDispatch();
+    let current_page_num = 0;
 
     useEffect(() => {
         dispatch(layDanhSachNguoiDungAction());
@@ -30,7 +31,7 @@ export default function Users(props) {
             dataIndex: 'stt',
             key: 'stt',
             render: (text, record, index) => {
-                let stt = ReactHtmlParser(index+1);
+                let stt = ReactHtmlParser((index+1)+10*current_page_num);
                 return <div>{stt}</div>
             }
         },
@@ -91,7 +92,9 @@ export default function Users(props) {
     const data = arrUsers;
 
     function onChange(pagination, filters, sorter, extra) {
-        // console.log('params', pagination, filters, sorter, extra);
+        current_page_num = pagination.current-1;
+        console.log('pagination', pagination.current);
+        console.log('current_page_num',current_page_num);
     }
 
     const { Search } = Input;

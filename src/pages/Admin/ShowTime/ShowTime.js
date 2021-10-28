@@ -47,7 +47,7 @@ export default function ShowTime(props) {
             });
             console.log('heThongRapChieu', result.data.content)
         } catch (errors) {
-            console.log('errors', errors?.response.data);
+            console.log('errors', errors.response?.data);
         }
     }, []);
 
@@ -60,7 +60,7 @@ export default function ShowTime(props) {
             })
             console.log('cumRapChieu', result.data.content);
         } catch (errors) {
-            console.log('errors', errors?.response.data);
+            console.log('errors', errors.response?.data);
         }
     }
 

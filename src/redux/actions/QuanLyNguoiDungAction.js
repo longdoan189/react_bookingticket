@@ -125,6 +125,11 @@ export const themNguoiDungAction = (nguoiDung) => {
             })
         } catch (errors) {
             console.log('errors', errors.response?.data);
+            swal({
+                title: `${errors.response.data.content}`,
+                buttons: 'OK',
+                icon: "error",
+            });
         }
     }
 }
@@ -161,6 +166,11 @@ export const capNhatThongTinNguoiDungAction = (nd) => {
 
         } catch (errors) {
             console.log('errors', errors.response?.data);
+            swal({
+                title: `${errors.response.data.content}`,
+                buttons: 'OK',
+                icon: "error",
+            });
         }
     }
 }
