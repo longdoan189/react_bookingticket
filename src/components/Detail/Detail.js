@@ -118,7 +118,7 @@ export function ThongTin(props) {
     return <div>
         <div className="grid grid-cols-12 mt-5">
             <div className="col-span-7 text-base">
-                <p className="grid grid-cols-3"><span className="font-bold">Ngày khởi chiếu</span> <article className="font-semibold">{moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')}</article></p>
+                <p className="grid grid-cols-3"><span className="font-bold">Ngày khởi chiếu</span> <span className="font-semibold">{moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')}</span></p>
                 <div className="mt-5">
                     <p className="grid grid-cols-3"><span className="font-bold">Trailer</span><a href={`${filmDetail.trailer}`} target="_blank" className="font-semibold">{filmDetail.trailer}</a></p>
                 </div>

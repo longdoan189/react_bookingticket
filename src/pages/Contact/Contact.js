@@ -69,6 +69,7 @@ const Contact = () => {
     };
     const { userLogin, arrUsers } = useSelector(state => state.QuanLyNguoiDungReducer);
     const dispatch = useDispatch();
+
     useEffect(() => {
         const action = layDanhSachNguoiDungAction();
         dispatch(action);
@@ -76,9 +77,9 @@ const Contact = () => {
 
     let arrAdmins = arrUsers.filter(member => member.maLoaiNguoiDung === "QuanTri")
     arrAdmins = arrAdmins.slice(0, 6);
-    return (
 
-        <div className='pt-32 pl-16 grid grid-cols-2 gap-2'>
+    return (
+        <div className='pt-32 pl-16 grid grid-cols-2 gap-2 mb-10'>
             <form className="w-full" onSubmit={handleSubmit(onSubmit)} noValidate>
                 <h1 className='text-3xl'>{t("contact_us_here")}</h1>
                 <div className='grid grid-cols-2 gap-4'>
@@ -182,9 +183,8 @@ const Contact = () => {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
-
                                         {arrAdmins.map((object, i) =>
-                                            <tr>
+                                            <tr key={i}>
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="flex items-center">
                                                         <img className="h-10 w-10 rounded-full" src={"https://i.pravatar.cc/300/?u=" + i} alt="" />
@@ -201,10 +201,13 @@ const Contact = () => {
                                                     </div>
                                                 </td>
                                             </tr>
-
-
                                         )}
-                                    </tbody></table></div></div></div></div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <ToastContainer />
         </div>

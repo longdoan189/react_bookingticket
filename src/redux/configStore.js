@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
     QuanLyNguoiDungReducer,
     QuanLyDatVeReducer,
     LoadingReducer,
-    NewsReducer,
+    NewsReducer
 })
 
 export const store = createStore(rootReducer, applyMiddleware(thunk))
