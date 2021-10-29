@@ -134,8 +134,8 @@ export function LichSuDatVe(props) {
         return thongTinNguoiDung.thongTinDatVe?.map((ticket, index)=>{
             const location = _.first(ticket.danhSachGhe);
 
-            return <div style={{cursor:'pointer'}} className="p-2 lg:w-1/3 md:w-1/2 w-full">
-                <div key={index} className="h-full flex items-center border-gray-800 border p-4 rounded-lg hover:bg-blue-300">
+            return <div style={{cursor:'pointer'}} className="p-2 lg:w-1/3 md:w-1/2 w-full" key={index}>
+                <div className="h-full flex items-center border-gray-800 border p-4 rounded-lg hover:bg-blue-300">
                     <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src={ticket.hinhAnh} />
                     <div className="flex-grow">
                         <h2 className="text-blue-500 text-2xl title-font font-medium">{ticket.tenPhim}</h2>

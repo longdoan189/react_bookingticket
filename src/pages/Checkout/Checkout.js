@@ -35,7 +35,7 @@ function Checkout(props) {
         });
 
         //Vừa vào trang load tất cả danh sách ghế người khác đang đặt
-        connection.invoke("loadDanhSachGhe",props.match.params.id);
+        connection.invoke("loadDanhSachGhe", props.match.params.id);
 
         //Load danh sách ghế đang đặt từ server về (lắng nghe tín hiệu từ server trả về)
         connection.on('loadDanhSachGheDaDat', (dsGheKhachDat) => {
@@ -242,12 +242,12 @@ export default function (props) {
 
     const menu = (
         <Menu>
-            <Menu.Item>
+            <Menu.Item key="1">
                 <button className="text-blue-800" onClick={() => {
                     history.push('/profile');
                 }}>Cập nhật thông tin</button>
             </Menu.Item>
-            <Menu.Item>
+            <Menu.Item key="2">
                 <button className="text-blue-800" onClick={() => {
                     localStorage.removeItem(USER_LOGIN);
                     localStorage.removeItem(TOKEN);

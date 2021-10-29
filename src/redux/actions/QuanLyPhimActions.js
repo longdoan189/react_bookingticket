@@ -23,7 +23,7 @@ export const themPhimUploadHinhAction = (formData) => {
     return async (dispatch) => {
         try {
             const result = await quanLyPhimService.themPhimUploadHinh(formData);
-            swal({
+            await swal({
                 title: "Thêm phim thành công !!!",
                 icon: "success",
             });
@@ -32,6 +32,11 @@ export const themPhimUploadHinhAction = (formData) => {
         }
         catch (error) {
             console.log('error', error.response.data);
+            swal({
+                title: `${error.response.data.content}`,
+                buttons: 'OK',
+                icon: "error",
+            });
         }
     }
 }
@@ -65,6 +70,11 @@ export const capNhatPhimUploadAction = (formData) => {
             history.push('/admin/films'); 
         } catch (errors) {
             console.log('errors', errors.response.data);
+            swal({
+                title: `${errors.response.data.content}`,
+                buttons: 'OK',
+                icon: "error",
+            });
         }
     }
 }
