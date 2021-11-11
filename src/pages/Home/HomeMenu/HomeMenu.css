@@ -1,0 +1,16 @@
+@media  (max-width: 768px) {
+    .ant-tabs .ant-tabs-left{
+        display: grid;
+    }
+    .mx-8 {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .ant-tabs-content-holder {
+        overflow-x: scroll;
+    }
+
+    .container {
+        width: 95%;
+    }
+}

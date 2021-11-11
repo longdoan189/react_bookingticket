@@ -6,6 +6,31 @@ import { SET_FILM_DANG_CHIEU, SET_FILM_SAP_CHIEU } from "../../redux/actions/typ
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 
+import { useState, useEffect } from 'react';
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+}
+
 
 function SampleNextArrow(props) {
   const { className, style, onClick } = props;
@@ -33,10 +58,24 @@ function SamplePrevArrow(props) {
 const MultipleRowsSlick = (props) => {
 
   const { dangChieu, sapChieu } = useSelector(state => state.QuanLyPhimReducer);
+  const { width } = useWindowDimensions();
+  let centre_padding = '100px';
+  let numSlides = 3;
+  if (width < 640) {
+    centre_padding = '1px';
+    numSlides = 1;
+  }
+  else if (width < 1024) {
+    centre_padding = '50px';
+    numSlides = 2;
+  }
+  else {
+    centre_padding = '100px';
+    numSlides = 3;
+  }
   const dispatch = useDispatch();
   let activeFilmDC = dangChieu === true ? 'active_Film' : 'none_active_Film';
   let activeFilmSC = sapChieu === true ? 'active_Film' : 'none_active_Film';
-
 
   const renderFilms = () => {
     return props.arrFilm.map((item, index) => {
@@ -50,8 +89,8 @@ const MultipleRowsSlick = (props) => {
     className: "center variable-width",
     centerMode: true,
     infinite: true,
-    centerPadding: "100px",
-    slidesToShow: 3,
+    centerPadding: centre_padding,
+    slidesToShow: numSlides,
     speed: 500,
     rows: 1,
     slidesPerRow: 2,

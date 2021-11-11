@@ -10,7 +10,7 @@ import { history } from "../../App";
 import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from "../../util/settings/config";
 
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 export const AdminTemplate = (props) => {

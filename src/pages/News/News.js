@@ -18,13 +18,13 @@ export default function News(props) {
     return (
         <section className="text-gray-600 body-font">
             <div className="container px-5 py-24 mx-auto max-w-7x1">
-                <div className="flex flex-wrap w-full mb-4 p-4 mt-5" style={{position:'relative'}}>
+                <div className="flex flex-wrap w-full mb-4 p-4 mt-5 -left-14 sm:left-0" style={{position:'relative'}}>
                     <div className="w-full mb-6 lg:mb-0" style={{position:'absolute',left:'50%',width:'50%'}}>
                         <h1 className="sm:text-4xl text-5xl font-bold title-font mb-2 text-gray-900">{t('news')}</h1>
                         <div className="h-1 w-20 bg-indigo-500 rounded ml-2" />
                     </div>
                 </div>
-                <div className="flex flex-wrap -m-4 mt-10">
+                <div className="flex flex-wrap -m-4 mt-10 ">
                     {tintuc.map((sample_news, i) =>
                         <div className="xl:w-1/3 md:w-1/2 p-4" key={i}>
                             <div className="bg-white p-6 rounded-lg">
