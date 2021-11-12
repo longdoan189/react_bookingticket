@@ -79,10 +79,10 @@ const Contact = () => {
     arrAdmins = arrAdmins.slice(0, 6);
 
     return (
-        <div className='pt-32 pl-16 grid grid-cols-2 gap-2 mb-10'>
-            <form className="w-full" onSubmit={handleSubmit(onSubmit)} noValidate>
-                <h1 className='text-3xl'>{t("contact_us_here")}</h1>
-                <div className='grid grid-cols-2 gap-4'>
+        <div className='pt-32 pl-0 sm:pl-16 grid grid-cols-2 gap-2 mb-10'>
+            <form className="w-screen sm:w-full" onSubmit={handleSubmit(onSubmit)} noValidate>
+                <h1 className='text-3xl text-center'>{t("contact_us_here")}</h1>
+                <div className='grid grid-cols-2 gap-4 mt-10 sm:mt-12 lg:mt-0'>
                     <div className="flex flex-wrap -mx-3 mb-6">
                         <div className="w-full px-3">
                             <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -165,9 +165,9 @@ const Contact = () => {
                     </div>
                 </div>
             </form>
-            <div className="w-11/12 pl-10">
-                <h1 className='text-3xl'>{t('contact_admin')}</h1>
-                <div className="flex flex-col">
+            <div className="w-11/12 pl-10 hidden sm:block">
+                <h1 className='text-3xl text-center'>{t('contact_admin')}</h1>
+                <div className="flex flex-col mt-9">
                     <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">

@@ -15,7 +15,7 @@ export default function Film_Flip(props) {
 
     return (
         <div className="flip-card">
-            <div className="flip-card-inner">
+            <div className="flip-card-inner ">
                 <div className="flip-card-front">
                     <img src={item.hinhAnh} alt="Avatar" style={{ width: 300, height: 300, boxShadow:'0px 0px 15px 5px rgba(0,0,0,0.8)' }} />
                 </div>

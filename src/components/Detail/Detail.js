@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 import { history } from '../../App';
 import '../../assets/styles/circle.css';
 import { layThongTinChiTietPhim } from '../../redux/actions/types/QuanLyRapActions';
-
+import '../../pages/Home/HomeMenu/HomeMenu.css';
 
 const { TabPane } = Tabs;
 
@@ -60,7 +60,7 @@ export default function Detail(props) {
                     </div>
                 </div>
 
-                <div className="bg-transparent ml-32 w-10/12 mt-20 px-5 py-5 container">
+                <div className="bg-transparent lg:ml-32 md:ml-12 ml-0 sm:w-10/12  mt-20 sm:px-5 px-0 py-5 ">
                     <Tabs defaultActiveKey="1" centered>
                         <TabPane tab="Lịch chiếu" key="1">
                             <div>
@@ -117,16 +117,19 @@ export function ThongTin(props) {
 
     return <div>
         <div className="grid grid-cols-12 mt-5">
-            <div className="col-span-7 text-base">
-                <p className="grid grid-cols-3"><span className="font-bold">Ngày khởi chiếu</span> <span className="font-semibold">{moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')}</span></p>
-                <div className="mt-5">
+            <div className="lg:col-span-7 col-span-12 text-base">
+                <p className="grid grid-cols-3">
+                    <span className="font-bold">Ngày khởi chiếu</span> 
+                    <span className="font-semibold">{moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')}</span>
+                </p>
+                <div className="mt-5 md:break-normal break-words">
                     <p className="grid grid-cols-3"><span className="font-bold">Trailer</span><a href={`${filmDetail.trailer}`} target="_blank" className="font-semibold">{filmDetail.trailer}</a></p>
                 </div>
             </div>
-            <div className="col-span-5 text-base">
+            <div className="lg:col-span-5 col-span-12 text-base md:break-normal break-words">
                 <span className="font-bold">Nội dung</span>
                 <div className="mt-5">
-                    <span className="font-semibold">{filmDetail.moTa}</span>
+                    <span className="font-semibold w-10/12 md:w-full block">{filmDetail.moTa}</span>
                 </div>
             </div>
         </div>
@@ -166,14 +169,14 @@ export function DanhGia(props) {
    
 
     return <div>
-        <div className="mx-32 mt-10">
-            <div style={{ position: 'absolute', right: '430px', bottom: '41.5%', zIndex: 10 }}>
+        <div className="lg:mx-32 mt-10 sm:mx-0">
+            <div style={{ position: 'absolute', zIndex: 10 }} className="md:ml-80 mt-2 lg:left-1/3 ml-72">
                 <Rate tooltips={desc} onChange={handleChangeRate} value={`${filmDetail.danhGia/2}`} />
             </div>
-            <div style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'absolute', zIndex: 10, marginLeft: '10%' }} className="text-2xl rounded-full bg-blue-400 mt-1.5">{userLogin.taiKhoan ? userLogin.taiKhoan.substr(0, 1).toUpperCase() : <UserOutlined />}
+            <div style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'absolute', zIndex: 10}} className="text-2xl rounded-full bg-blue-400 mt-1.5 md:ml-24 lg:ml-32 ml-12">{userLogin.taiKhoan ? userLogin.taiKhoan.substr(0, 1).toUpperCase() : <UserOutlined />}
             </div>
-            <div style={{ width: 520, background: 'transparent', position: 'relative', zIndex: 1, cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: '15%' }} className="border rounded border-white" onClick={() => setModal2Visible(true)}>
-                <p style={{ marginRight: '45%' }} className="font-semibold pt-3.5">Bạn nghĩ gì về phim này?</p>
+            <div style={{ background: 'transparent', position: 'relative', zIndex: 1, cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center'}} className="border rounded border-black md:ml-20 md:w-3/4 lg:w-4/5 w-4/5 ml-5" onClick={() => setModal2Visible(true)}>
+                <p className="font-semibold pt-3.5 md:mr-32 lg:mr-56 mr-24">Bạn nghĩ gì về phim này?</p>
             </div>
             <Modal
                 title="Đánh giá phim"
@@ -188,8 +191,8 @@ export function DanhGia(props) {
             </Modal>
         </div>
         <section className="text-gray-600 body-font">
-            <div className="container px-5 py-16 mx-auto">
-                <div className="flex flex-wrap -m-2" >
+            <div className="container sm:px-5 px-0 py-16 sm:mx-auto -ml-1.5">
+                <div className="flex flex-wrap -m-2">
                     <div className="p-2 lg:w-1/3 md:w-1/2 w-full">
                         <div className="h-full flex items-center border-gray-200 border p-4 rounded-lg">
                             <img alt="team" className="w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full mr-4" src="https://i.pravatar.cc/900" />

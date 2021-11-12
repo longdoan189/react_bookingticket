@@ -31,6 +31,11 @@ export default function Dashboard(props) {
 								</button>
 							</NavLink>
 						</div>
+						<div className="mt-20 text-xl">
+							<p>Username: cyberlearntesting@yandex.com</p>
+							<p>Password: String123</p>
+							<p>Email contact: <a href="https://mail.yandex.com/" target="_blank">https://mail.yandex.com</a></p>
+						</div>
 					</div>
 				</div>
 			</section>

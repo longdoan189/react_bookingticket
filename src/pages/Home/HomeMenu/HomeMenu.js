@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
+import './HomeMenu.css';
 
 
 const { TabPane } = Tabs;
@@ -29,7 +30,7 @@ export default function HomeMenu(props) {
 
     const renderHeThongRap = () => {
         return props.heThongRapChieu?.map((heThongRap, index) => {
-            return <TabPane tab={<img src={heThongRap.logo} className="rounded-full" width={50} />} key={index}>
+            return <TabPane tab={<img src={heThongRap.logo} className="rounded-full " width={50} />} key={index}>
                 <Tabs tabPosition={tabPosition}>
                     {heThongRap.lstCumRap?.map((cumRap, index) => {
                         return <TabPane tab={
@@ -50,7 +51,7 @@ export default function HomeMenu(props) {
                                             <div className="ml-2">
                                                 <h1 className="text-2xl text-green-700">{phim.tenPhim}</h1>
                                                 <p>{cumRap.diaChi}</p>
-                                                <div className="grid grid-cols-6 gap-6">
+                                                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
                                                     {phim.lstLichChieuTheoPhim?.slice(0, 12).map((lichChieu, index) => {
                                                         return <NavLink className="text-xl text-red-400" to={`/checkout/${lichChieu.maLichChieu}`} key={index}>
                                                             {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}

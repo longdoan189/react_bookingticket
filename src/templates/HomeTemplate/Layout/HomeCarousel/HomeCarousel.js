@@ -20,7 +20,7 @@ export default function HomeCarousel(props) {
     const { arrImg } = useSelector(state => state.CarouselReducer);
     const dispatch = useDispatch();
 
-    useEffect( () => {
+    useEffect(() => {
         dispatch(getCarouselAction());
     }, [])
 
@@ -35,7 +35,7 @@ export default function HomeCarousel(props) {
     }
 
     return (
-        <Carousel  autoplay>
+        <Carousel autoplay>
             {renderImg()}
         </Carousel>
     )
