@@ -60,7 +60,7 @@ export default function Detail(props) {
                     </div>
                 </div>
 
-                <div className="bg-transparent lg:ml-32 md:ml-12 sm:ml-5 ml-0 sm:w-10/12 w-screen mt-20 sm:px-5 px-0 py-5 ">
+                <div className="bg-transparent lg:ml-32 md:ml-12 ml-0 sm:w-10/12  mt-20 sm:px-5 px-0 py-5 ">
                     <Tabs defaultActiveKey="1" centered>
                         <TabPane tab="Lịch chiếu" key="1">
                             <div>
@@ -117,16 +117,19 @@ export function ThongTin(props) {
 
     return <div>
         <div className="grid grid-cols-12 mt-5">
-            <div className="col-span-7 text-base">
-                <p className="grid grid-cols-3"><span className="font-bold">Ngày khởi chiếu</span> <span className="font-semibold">{moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')}</span></p>
-                <div className="mt-5">
+            <div className="lg:col-span-7 col-span-12 text-base">
+                <p className="grid grid-cols-3">
+                    <span className="font-bold">Ngày khởi chiếu</span> 
+                    <span className="font-semibold">{moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')}</span>
+                </p>
+                <div className="mt-5 md:break-normal break-words">
                     <p className="grid grid-cols-3"><span className="font-bold">Trailer</span><a href={`${filmDetail.trailer}`} target="_blank" className="font-semibold">{filmDetail.trailer}</a></p>
                 </div>
             </div>
-            <div className="col-span-5 text-base">
+            <div className="lg:col-span-5 col-span-12 text-base md:break-normal break-words">
                 <span className="font-bold">Nội dung</span>
                 <div className="mt-5">
-                    <span className="font-semibold">{filmDetail.moTa}</span>
+                    <span className="font-semibold w-10/12 md:w-full block">{filmDetail.moTa}</span>
                 </div>
             </div>
         </div>

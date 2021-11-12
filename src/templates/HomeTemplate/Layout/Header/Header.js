@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { history } from '../../../../App';
 import { Select, Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+
 import _ from 'lodash';
 
 //Hook đa ngôn ngữ
@@ -11,7 +12,28 @@ import { useSelector } from 'react-redux';
 import { TOKEN, TOKEN_CYBERSOFT, USER_LOGIN } from '../../../../util/settings/config';
 
 const { Option } = Select;
+function getWindowDimensions() {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height
+    };
+}
 
+function useWindowDimensions() {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+}
 
 export default function Header(props) {
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
@@ -22,6 +44,15 @@ export default function Header(props) {
         i18n.changeLanguage(value);
     }
     const [show, toggleShow] = React.useState(true);
+    const { width } = useWindowDimensions();
+    /*Hien toan bo header hay khong => khi man hinh > 1024 mac dinh hien */
+    let start_show = true
+    if (width < 1024) {
+        start_show = false;
+    }
+    else {
+        start_show = true;
+    }
 
     const menu = (
         <Menu>
@@ -82,18 +113,18 @@ export default function Header(props) {
                         <img src="https://cyberlearn.vn/wp-content/uploads/2020/03/cyberlearn-min-new-opt2.png" alt="cyberlearn.vn" />
                     </NavLink>
                 </div>
-                {!show &&
+                {!(show || start_show) &&
                     <button className="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white" onClick={() => toggleShow(!show)}>
-                        <svg className="h-3 w-96" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
+                        <svg className="h-4 w-12" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
                     </button>}
-                {show &&
+                {(show || start_show) &&
                     <div className="block lg:hidden">
                         <button className="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white" onClick={() => toggleShow(!show)}>
-                            <svg className="h-3 w-96" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
+                            <svg className="h-4 w-12" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" ><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
                         </button>
                     </div>
                 }
-                {show &&
+                {(show || start_show) &&
                     <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                         <div className="text-sm lg:flex-grow">
                             <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
@@ -106,7 +137,7 @@ export default function Header(props) {
                                 <NavLink to="/news" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-violet-600 border-violet-600 text-white" activeClassName="border-b-2 border-white">{t('news')}</NavLink>
                             </a>
                         </div>
-                        <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white">
+                        <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white ml-4">
                             {renderLogin()}
                         </a>
                         <div>
@@ -137,7 +168,6 @@ export default function Header(props) {
                     </div>
                 }
             </nav>
-
         </header>
     )
 }
