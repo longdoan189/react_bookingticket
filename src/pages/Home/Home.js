@@ -12,7 +12,7 @@ export default function Home(props) {
     const { heThongRapChieu } = useSelector(state => state.QuanLyRapReducer);
 
     const dispatch = useDispatch();
-    console.log('propsHome', arrFilm);
+    // console.log('propsHome', arrFilm);
 
     useEffect(() => {
         const action = layDanhSachPhimAction();

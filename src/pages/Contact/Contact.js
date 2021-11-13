@@ -45,7 +45,7 @@ const Contact = () => {
     const onSubmit = async (data) => {
         // Destrcture data object
         const { name, email, subject, message } = data;
-        console.log(name, email, subject, message);
+        // console.log(name, email, subject, message);
         try {
             const templateParams = {
                 name,

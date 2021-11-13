@@ -14,8 +14,8 @@ export default function Film_Flip(props) {
     const { item } = props;
 
     return (
-        <div className="flip-card">
-            <div className="flip-card-inner ">
+        <div className="flip-card mx-0 md:mx-20 lg:mx-0">
+            <div className="flip-card-inner">
                 <div className="flip-card-front">
                     <img src={item.hinhAnh} alt="Avatar" style={{ width: 300, height: 300, boxShadow:'0px 0px 15px 5px rgba(0,0,0,0.8)' }} />
                 </div>
@@ -31,7 +31,7 @@ export default function Film_Flip(props) {
                     </div>
                 </div>
             </div>
-            <div className="bg-green-500 rounded-md text-center cursor-pointer py-2  my-2 text-success-50 font-bold" onClick={()=>{
+            <div className="bg-green-500 rounded-md text-center cursor-pointer py-2 my-3 mx-20 lg:mx-0 text-success-50 font-bold" onClick={()=>{
                 history.push(`/detail/${item.maPhim}`);
             }}>{t('booking')}</div>
         </div>

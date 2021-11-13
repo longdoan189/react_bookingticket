@@ -15,7 +15,7 @@ export default function Footer(props) {
     const { heThongRapChieu } = useSelector(state => state.QuanLyRapReducer);
 
     const arrHeThongRap = _.map(heThongRapChieu, (heThongRap) => _.pick(heThongRap, ['maHeThongRap', 'tenHeThongRap', 'logo']));
-    console.log('arrHeThongRap', arrHeThongRap);
+    // console.log('arrHeThongRap', arrHeThongRap);
 
     return (
         <footer className="py-6 dark:bg-coolGray-800 dark:text-coolGray-50 bg-gray-800">

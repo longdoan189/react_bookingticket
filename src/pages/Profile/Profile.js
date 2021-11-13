@@ -50,7 +50,7 @@ export function ThongTinCaNhan(props) {
     const { thongTinNguoiDung } = useSelector(state => state.QuanLyNguoiDungReducer);
     const dispatch = useDispatch();
 
-    console.log('thongTinNguoiDung', thongTinNguoiDung);
+    // console.log('thongTinNguoiDung', thongTinNguoiDung);
 
     const onFormLayoutChange = ({ size }) => {
         setComponentSize(size);
@@ -73,7 +73,7 @@ export function ThongTinCaNhan(props) {
         },
         onSubmit: (values) => {
             values.maNhom = GROUPID;
-            console.log(values);
+            // console.log(values);
 
             dispatch(capNhatTaiKhoanAction(values));
         }

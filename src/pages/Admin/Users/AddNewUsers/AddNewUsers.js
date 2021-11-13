@@ -40,7 +40,7 @@ const AddNewUsers = (props) => {
         onSubmit: values => {
             values.maNhom = GROUPID;
             dispatch(themNguoiDungAction(values));
-            console.log('values', values);
+            // console.log('values', values);
         }
     });
 

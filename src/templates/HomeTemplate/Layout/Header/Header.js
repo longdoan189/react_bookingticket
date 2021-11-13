@@ -126,7 +126,7 @@ export default function Header(props) {
                 }
                 {(show || start_show) &&
                     <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                        <div className="text-sm lg:flex-grow">
+                        <div className="text-sm lg:flex-grow font-medium">
                             <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
                                 <NavLink to="/home" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-violet-600 border-violet-600 text-white" activeClassName="border-b-2 border-white">{t('home')}</NavLink>
                             </a>
@@ -141,7 +141,7 @@ export default function Header(props) {
                             {renderLogin()}
                         </a>
                         <div>
-                            <a href="#" className="inline-block text-sm px-4 py-2 leading-none mt-4 lg:mt-0">
+                            <a className="inline-block text-sm px-4 py-2 leading-none mt-4 lg:mt-0">
                                 <Select defaultValue={localStorage.getItem('i18nextLng')} style={{ width: 100 }} onChange={handleChange}>
                                     <Option value="en">
                                         <div className="flex flex-row justify-between">
@@ -162,7 +162,6 @@ export default function Header(props) {
                                         </div>
                                     </Option>
                                 </Select>
-
                             </a>
                         </div>
                     </div>

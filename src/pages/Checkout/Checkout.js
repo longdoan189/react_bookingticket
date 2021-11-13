@@ -21,7 +21,7 @@ function Checkout(props) {
 
     const { userLogin } = useSelector(state => state.QuanLyNguoiDungReducer);
     const { chiTietPhongVe, danhSachGheDangDat, danhSachGheKhachDat } = useSelector(state => state.QuanLyDatVeReducer);
-    console.log('danhSachGheDangDat', danhSachGheDangDat);
+    // console.log('danhSachGheDangDat', danhSachGheDangDat);
 
     const dispatch = useDispatch();
 
@@ -39,7 +39,7 @@ function Checkout(props) {
 
         //Load danh sách ghế đang đặt từ server về (lắng nghe tín hiệu từ server trả về)
         connection.on('loadDanhSachGheDaDat', (dsGheKhachDat) => {
-            console.log('danhSachGheKhachDat', dsGheKhachDat);
+            // console.log('danhSachGheKhachDat', dsGheKhachDat);
             //Loại mình ra khỏi danh sách
             dsGheKhachDat = dsGheKhachDat.filter(item => item.taiKhoan !== userLogin.taiKhoan);
 
@@ -73,7 +73,7 @@ function Checkout(props) {
         connection.invoke('huyDat', userLogin.taiKhoan, props.match.params.id);
     }
 
-    console.log('chiTietPhongVe', chiTietPhongVe);
+    // console.log('chiTietPhongVe', chiTietPhongVe);
 
     const { thongTinPhim, danhSachGhe } = chiTietPhongVe;
 
@@ -127,8 +127,9 @@ function Checkout(props) {
                             {renderGhe()}
                         </div>
                     </div>
-                    <div className="mt-5 flex justify-center">
-                        <table className="w-full divide-y divide-gray-200 text-left table-auto">
+                    <div className="my-5 lg:ml-24 ml-32 flex flex-wrap font-bold text-center">
+                        
+                    {/* <table className="w-full divide-y divide-gray-200 text-left table-auto">
                             <thead className="bg-gray-50">
                                 <tr>
                                     <th>Ghế chưa đặt</th>
@@ -149,78 +150,102 @@ function Checkout(props) {
                                     <td><button className="ghe gheKhachDat text-center"><CheckOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button></td>
                                 </tr>
                             </tbody>
-                        </table>
+                        </table> */}
+                    <div className="flex flex-col ml-0 md:ml-8 lg:ml-10 ">
+                        <button className="ghe "></button>
+                        <span>Ghế chưa đặt</span>
+                    </div>
+                    <div className="flex flex-col ml-0 md:ml-8 lg:ml-10 ">
+                        <button className="ghe gheDangDat "></button>
+                        <span>Ghế đang chọn</span>
+                    </div>
+                    <div className="flex flex-col ml-0 md:ml-8 lg:ml-10 ">
+                        <button className="ghe gheVip "></button>
+                        <span>Ghế Vip</span>
+                    </div>
+                    <div className="flex flex-col ml-0 md:ml-8 lg:ml-10 ">
+                        <button className="ghe gheDaDuocDat "><UserOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button>
+                        <span>Ghế bạn đặt</span>
+                    </div>
+                    <div className="flex flex-col ml-0 md:ml-10 lg:ml-10 ">
+                        <button className="ghe gheDaDat "><CloseCircleOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button>
+                        <span>Ghế đã đặt</span>
+                    </div>
+                    <div className="flex flex-col ml-0 md:ml-12 lg:ml-10 ">
+                        <button className="ghe gheKhachDat "><TeamOutlined style={{ fontWeight: 'bold', fontSize: 20 }} /></button>
+                        <span className="mr-10 md:pr-0 pr-7 md:mr-2 lg:mr-0">Ghế khách đang đặt</span>
                     </div>
                 </div>
-                <div className="col-span-3">
-                    <h3 className="text-green-500 text-center text-4xl mt-5">
-                        {danhSachGheDangDat.reduce((tongTien, ghe, index) => {
-                            return tongTien += ghe.giaVe;
-                        }, 0).toLocaleString()}đ
-                    </h3>
-                    <hr />
-                    <h3 className="text-xl">{thongTinPhim.tenPhim}</h3>
-                    <p>{thongTinPhim.cumRap}</p>
-                    <p>{thongTinPhim.ngayChieu} - {thongTinPhim.gioChieu} - {thongTinPhim.tenRap}</p>
-                    <hr />
-                    <div style={{ width: '100%' }}>
-                        <table className="border-collapse border-green-400 w-full text-center  border-4">
-                            <thead className="w-full" style={{ width: '100%' }}>
-                                <tr className="text-2xl">
-                                    <th className="border">Ghế</th>
-                                    <th className="border">Loại Ghế</th>
-                                    <th className="border">Giá</th>
+            </div>
+            <div className="col-span-3">
+                <h3 className="text-green-500 text-center text-4xl mt-5">
+                    {danhSachGheDangDat.reduce((tongTien, ghe, index) => {
+                        return tongTien += ghe.giaVe;
+                    }, 0).toLocaleString()}đ
+                </h3>
+                <hr />
+                <h3 className="text-xl">{thongTinPhim.tenPhim}</h3>
+                <p>{thongTinPhim.cumRap}</p>
+                <p>{thongTinPhim.ngayChieu} - {thongTinPhim.gioChieu} - {thongTinPhim.tenRap}</p>
+                <hr />
+                <div style={{ width: '100%' }}>
+                    <table className="border-collapse border-green-400 w-full text-center  border-4">
+                        <thead className="w-full" style={{ width: '100%' }}>
+                            <tr className="text-2xl">
+                                <th className="border">Ghế</th>
+                                <th className="border">Loại Ghế</th>
+                                <th className="border">Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {_.sortBy(danhSachGheDangDat, ['stt']).map((gheDD, index) => {
+                                return <tr key={index} className="text-xl">
+                                    <td className="border">{gheDD.stt}</td>
+                                    <td className="border">{gheDD.loaiGhe}</td>
+                                    <td className="border">{(gheDD.giaVe).toLocaleString()}đ</td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                {_.sortBy(danhSachGheDangDat, ['stt']).map((gheDD, index) => {
-                                    return <tr key={index} className="text-xl">
-                                        <td className="border">{gheDD.stt}</td>
-                                        <td className="border">{gheDD.loaiGhe}</td>
-                                        <td className="border">{(gheDD.giaVe).toLocaleString()}đ</td>
-                                    </tr>
-                                })}
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td className="border"></td>
-                                    <td className="border"></td>
-                                    <td className="border">
-                                        <span className="text-green-500 text-2xl font-bold">
-                                            {danhSachGheDangDat.reduce((tongTien, ghe, index) => {
-                                                return tongTien += ghe.giaVe;
-                                            }, 0).toLocaleString()}đ
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                    </div>
-                    <hr />
-                    <div className="my-5">
-                        <i>Email</i> <br />
-                        {userLogin.email}
-                    </div>
-                    <div className="my-5">
-                        <i>Phone</i> <br />
-                        {userLogin.soDT}
-                    </div>
-                    <hr />
-                    <div className="mb-0 flex flex-col items-center h-full">
-                        <div onClick={() => {
-                            const thongTinDatVe = new ThongTinDatVe();
-                            thongTinDatVe.maLichChieu = props.match.params.id;
-                            thongTinDatVe.danhSachVe = danhSachGheDangDat;
-                            console.log('thongTinDatVe', thongTinDatVe);
+                            })}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td className="border"></td>
+                                <td className="border"></td>
+                                <td className="border">
+                                    <span className="text-green-500 text-2xl font-bold">
+                                        {danhSachGheDangDat.reduce((tongTien, ghe, index) => {
+                                            return tongTien += ghe.giaVe;
+                                        }, 0).toLocaleString()}đ
+                                    </span>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <hr />
+                <div className="my-5">
+                    <i>Email</i> <br />
+                    {userLogin.email}
+                </div>
+                <div className="my-5">
+                    <i>Phone</i> <br />
+                    {userLogin.soDT}
+                </div>
+                <hr />
+                <div className="mb-0 flex flex-col items-center h-full">
+                    <div onClick={() => {
+                        const thongTinDatVe = new ThongTinDatVe();
+                        thongTinDatVe.maLichChieu = props.match.params.id;
+                        thongTinDatVe.danhSachVe = danhSachGheDangDat;
+                        // console.log('thongTinDatVe', thongTinDatVe);
 
-                            dispatch(datVeAction(thongTinDatVe));
-                        }} className="bg-green-500 text-white w-full text-center py-3 font-bold text-2xl border-2 border-indigo-800" style={{ cursor: 'pointer' }}>
-                            ĐẶT VÉ
-                        </div>
+                        dispatch(datVeAction(thongTinDatVe));
+                    }} className="bg-green-500 text-white w-full text-center py-3 font-bold text-2xl border-2 border-indigo-800" style={{ cursor: 'pointer' }}>
+                        ĐẶT VÉ
                     </div>
                 </div>
             </div>
         </div>
+        </div >
     )
 }
 
@@ -261,14 +286,14 @@ export default function (props) {
 
     const operations = <Fragment>
         {!_.isEmpty(userLogin) ? <Fragment>
-            <button className="text-lg" style={{ pointerEvents: 'none' }}>
+            <button className="text-lg hidden md:inline-block" style={{ pointerEvents: 'none' }}>
                 Hello, <span className="text-blue-300 font-medium">{userLogin.taiKhoan}</span>
             </button>
-            <button style={{ pointerEvents: 'none' }}>
+            <button style={{ pointerEvents: 'none' }} className="hidden md:inline-block">
                 <div style={{ width: 50, height: 50, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-blue-400 mx-3 mb-5">{userLogin.taiKhoan.substr(0, 1)}
                 </div>
             </button>
-            <Dropdown className="mr-5" overlay={menu}>
+            <Dropdown className="mr-5 hidden md:inline-block" overlay={menu}>
                 <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                     <DownOutlined />
                 </a>
@@ -325,7 +350,7 @@ export function KetQuaDatVe(props) {
         dispatch(action);
     }, []);
 
-    console.log('thongTinNguoiDung', thongTinNguoiDung);
+    // console.log('thongTinNguoiDung', thongTinNguoiDung);
 
     const renderTicketItem = () => {
         return thongTinNguoiDung.thongTinDatVe?.map((ticket, index) => {

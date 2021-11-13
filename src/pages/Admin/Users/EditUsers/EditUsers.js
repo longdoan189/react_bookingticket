@@ -47,7 +47,7 @@ const EditUsers = (props) => {
         onSubmit: (values) => {
             values.maNhom = GROUPID;
             dispatch(capNhatThongTinNguoiDungAction(values));
-            console.log('values', values);
+            // console.log('values', values);
         }
     });
 
@@ -56,7 +56,7 @@ const EditUsers = (props) => {
     };
 
     const handleChangeSelect = (value) => {
-        console.log(value)
+        // console.log(value);
         formik.setFieldValue('maLoaiNguoiDung', value);
     }
 
