@@ -14,7 +14,7 @@ export default function Films(props) {
     const { arrFilmDefault } = useSelector(state => state.QuanLyPhimReducer);
     const dispatch = useDispatch();
 
-    console.log('arrFilmDefault', arrFilmDefault);
+    // console.log('arrFilmDefault', arrFilmDefault);
 
     useEffect(() => {
         dispatch(layDanhSachPhimAction());
@@ -95,7 +95,7 @@ export default function Films(props) {
     }
 
     const onSearch = value => {
-        console.log(value);
+        // console.log(value);
         dispatch(layDanhSachPhimAction(value));
     }
 

@@ -107,18 +107,20 @@ const MultipleRowsSlick = (props) => {
 
   return (
     <div>
-      <button className={`${styleSlick[activeFilmDC]} px-8 py-3 font-semibold rounded bg-green-500 text-white mr-2`} onClick={() => {
-        const action = {
-          type: SET_FILM_DANG_CHIEU
-        }
-        dispatch(action);
-      }}>{t('playingmovie')}</button>
-      <button className={`${styleSlick[activeFilmSC]} px-8 py-3 font-semibold rounded border border-green-500 text-green-500`} onClick={() => {
-        const action = {
-          type: SET_FILM_SAP_CHIEU
-        }
-        dispatch(action);
-      }}>{t('upcomingmovie')}</button>
+      <div className="flex justify-center items-center">
+        <button className={`${styleSlick[activeFilmDC]} sm:px-8 px-10 py-3 font-semibold rounded bg-green-500 text-white mr-2`} onClick={() => {
+          const action = {
+            type: SET_FILM_DANG_CHIEU
+          }
+          dispatch(action);
+        }}>{t('playingmovie')}</button>
+        <button className={`${styleSlick[activeFilmSC]} px-8 py-3 font-semibold rounded border border-green-500 text-green-500`} onClick={() => {
+          const action = {
+            type: SET_FILM_SAP_CHIEU
+          }
+          dispatch(action);
+        }}>{t('upcomingmovie')}</button>
+      </div>
       <Slider {...settings}>
         {renderFilms()}
       </Slider>

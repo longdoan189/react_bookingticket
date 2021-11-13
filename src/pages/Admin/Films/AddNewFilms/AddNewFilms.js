@@ -25,7 +25,7 @@ const AddNewFilms = () => {
             hinhAnh: {},
         },
         onSubmit: values => {
-            console.log('values', values);
+            // console.log('values', values);
             values.maNhom = GROUPID;
             //Tạo đối tượng formdata => Đưa giá trị values từ formik vào formData
             let formData = new FormData();

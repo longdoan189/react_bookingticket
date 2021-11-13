@@ -17,7 +17,7 @@ export default function ShowTime(props) {
             giaVe: ''
         },
         onSubmit: async (values) => {
-            console.log('values', values);
+            // console.log('values', values);
             try {
                 const result = await quanLyDatVeService.taoLichChieu(values);
 
@@ -45,7 +45,7 @@ export default function ShowTime(props) {
                 ...state,
                 heThongRapChieu: result.data.content
             });
-            console.log('heThongRapChieu', result.data.content)
+            // console.log('heThongRapChieu', result.data.content);
         } catch (errors) {
             console.log('errors', errors.response?.data);
         }
@@ -58,7 +58,7 @@ export default function ShowTime(props) {
                 ...state,
                 cumRapChieu: result.data.content
             })
-            console.log('cumRapChieu', result.data.content);
+            // console.log('cumRapChieu', result.data.content);
         } catch (errors) {
             console.log('errors', errors.response?.data);
         }
@@ -66,7 +66,7 @@ export default function ShowTime(props) {
 
     const handleChangeCumRap = (values) => {
         formik.setFieldValue('maRap', values);
-        console.log('cumRap', values);
+        // console.log('cumRap', values);
     }
 
     const onOk = (values) => {

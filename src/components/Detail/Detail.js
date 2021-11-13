@@ -42,8 +42,8 @@ export default function Detail(props) {
                         <div className="grid sm:grid-cols-3 grid-cols-1">
                             <img className="col-span-1" src={filmDetail.hinhAnh} alt="..." className="w-full md:w-full sm:h-80 h-full" />
                             <div className="col-span-2 ml-5" style={{ marginTop: '30%' }}>
-                                <p className="text-sm text-black lg:text-white font-medium ml-12 sm:ml-0">Ngày khởi chiếu: {moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')} </p>
-                                <h1 className="text-4xl text-black lg:text-white ml-5 md:ml-0">{filmDetail.tenPhim}</h1>
+                                <p className="text-sm text-black font-medium ml-12 sm:ml-0">Ngày khởi chiếu: {moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')} </p>
+                                <h1 className="text-4xl text-black ml-5 md:ml-0">{filmDetail.tenPhim}</h1>
                             </div>
                         </div>
                     </div>

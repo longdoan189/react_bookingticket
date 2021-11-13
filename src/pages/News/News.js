@@ -32,7 +32,9 @@ export default function News(props) {
                                 <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">{sample_news.author}</h3>
                                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{sample_news.title}</h2>
                                 <p className="leading-relaxed text-base">{sample_news.description}</p>
-                                <a href={sample_news.url} target="_blank">{t("external_link")}</a>
+                                <button className="p-2 rounded bg-indigo-400">
+                                    <a href={sample_news.url} target="_blank" className="text-black">{t("external_link")}</a>
+                                </button>
                             </div>
                         </div>
                     )}

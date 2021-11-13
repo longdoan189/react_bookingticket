@@ -15,7 +15,7 @@ const EditFilms = (props) => {
     const { thongTinPhim } = useSelector(state => state.QuanLyPhimReducer);
     const dispatch = useDispatch();
 
-    console.log('thongTinPhim', thongTinPhim);
+    // console.log('thongTinPhim', thongTinPhim);
 
     useEffect(() => {
         let { id } = props.match.params;
@@ -37,7 +37,7 @@ const EditFilms = (props) => {
             hinhAnh: null,
         },
         onSubmit: values => {
-            console.log('values', values);
+            // console.log('values', values);
             values.maNhom = GROUPID;
             //Tạo đối tượng formdata => Đưa giá trị values từ formik vào formData
             let formData = new FormData();
