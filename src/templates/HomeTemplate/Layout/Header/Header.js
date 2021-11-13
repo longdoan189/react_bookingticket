@@ -43,10 +43,10 @@ export default function Header(props) {
     const handleChange = (value) => {
         i18n.changeLanguage(value);
     }
-    const [show, toggleShow] = React.useState(true);
+    const [show, toggleShow] = React.useState(false);
     const { width } = useWindowDimensions();
     /*Hien toan bo header hay khong => khi man hinh > 1024 mac dinh hien */
-    let start_show = true
+    let start_show = true;
     if (width < 1024) {
         start_show = false;
     }

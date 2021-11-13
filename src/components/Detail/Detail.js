@@ -37,21 +37,21 @@ export default function Detail(props) {
                 blur={20}
                 borderRadius={0}
             >
-                <div className="grid grid-cols-12">
-                    <div className="col-span-5 col-start-3">
-                        <div className="grid grid-cols-3">
-                            <img className="col-span-1" src={filmDetail.hinhAnh} alt="..." style={{ width: '100%', height: 300 }} />
+                <div className="grid grid-cols-3 sm:grid-cols-12 mt-5">
+                    <div className="col-span-5 sm:col-start-3">
+                        <div className="grid sm:grid-cols-3 grid-cols-1">
+                            <img className="col-span-1" src={filmDetail.hinhAnh} alt="..." className="w-full md:w-full sm:h-80 h-full" />
                             <div className="col-span-2 ml-5" style={{ marginTop: '30%' }}>
-                                <p className="text-sm">Ngày khởi chiếu: {moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')} </p>
-                                <h1 className="text-4xl text-white">{filmDetail.tenPhim}</h1>
+                                <p className="text-sm text-black lg:text-white font-medium ml-12 sm:ml-0">Ngày khởi chiếu: {moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')} </p>
+                                <h1 className="text-4xl text-black lg:text-white ml-5 md:ml-0">{filmDetail.tenPhim}</h1>
                             </div>
                         </div>
                     </div>
-                    <div className="col-span-4">
-                        <h1 style={{ marginLeft: '18%', color: 'yellow', fontWeight: 'bold', fontSize: 15 }}>Đánh giá</h1>
-                        <h1 style={{ marginLeft: '5%' }} className="text-green-400 text-2xl"><Rate allowHalf value={filmDetail.danhGia / 2} style={{ color: '#78ed78', fontSize: 30 }} /></h1>
+                    <div className="col-span-4 ml-12 sm:ml-0">
+                        <h1 style={{ color: 'red', fontWeight: 'bold', fontSize: 15 }} className="sm:ml-20 ml-20">Đánh giá</h1>
+                        <h1 className="text-green-400 text-2xl text-center mr-10 md:mr-3 lg:text-left lg:ml-5"><Rate allowHalf value={filmDetail.danhGia / 2} style={{ color: '#78ed78', fontSize: 30 }} /></h1>
                         <div className={`c100 p${filmDetail.danhGia * 10} big`}>
-                            <span>{filmDetail.danhGia * 10}%</span>
+                            <span className='sm:bg-transparent rounded-full font-medium'>{filmDetail.danhGia * 10}%</span>
                             <div className="slice">
                                 <div className="bar"></div>
                                 <div className="fill"></div>
@@ -60,7 +60,7 @@ export default function Detail(props) {
                     </div>
                 </div>
 
-                <div className="bg-transparent lg:ml-32 md:ml-12 ml-0 sm:w-10/12  mt-20 sm:px-5 px-0 py-5 ">
+                <div className="bg-transparent lg:ml-32 md:ml-12 ml-0 sm:w-10/12 mt-20 sm:px-5 px-0 py-5">
                     <Tabs defaultActiveKey="1" centered>
                         <TabPane tab="Lịch chiếu" key="1">
                             <div>
@@ -83,7 +83,7 @@ export default function Detail(props) {
                                                             <p className="text-black font-semibold">{cumRap.diaChi}</p>
                                                         </div>
                                                     </div>
-                                                    <div className="thong-tin-lich-chieu grid grid-cols-4">
+                                                    <div className="thong-tin-lich-chieu grid grid-cols-2 sm:grid-cols-4">
                                                         {cumRap.lichChieuPhim?.slice(0, 12).map((lichChieu, index) => {
                                                             return <NavLink to={`/checkout/${lichChieu.maLichChieu}`} key={index} className="col-span-1 mt-5 text-green-400 font-bold text-xl">
                                                                 {moment(lichChieu.ngayChieuGioChieu).format('hh:mm A')}
@@ -119,7 +119,7 @@ export function ThongTin(props) {
         <div className="grid grid-cols-12 mt-5">
             <div className="lg:col-span-7 col-span-12 text-base">
                 <p className="grid grid-cols-3">
-                    <span className="font-bold">Ngày khởi chiếu</span> 
+                    <span className="font-bold">Ngày khởi chiếu</span>
                     <span className="font-semibold">{moment(filmDetail.ngayKhoiChieu).format('DD.MM.YYYY')}</span>
                 </p>
                 <div className="mt-5 md:break-normal break-words">
@@ -166,17 +166,21 @@ export function DanhGia(props) {
         }
     }
 
-   
+
 
     return <div>
-        <div className="lg:mx-32 mt-10 sm:mx-0">
-            <div style={{ position: 'absolute', zIndex: 10 }} className="md:ml-80 mt-2 lg:left-1/3 ml-72">
-                <Rate tooltips={desc} onChange={handleChangeRate} value={`${filmDetail.danhGia/2}`} />
-            </div>
-            <div style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'absolute', zIndex: 10}} className="text-2xl rounded-full bg-blue-400 mt-1.5 md:ml-24 lg:ml-32 ml-12">{userLogin.taiKhoan ? userLogin.taiKhoan.substr(0, 1).toUpperCase() : <UserOutlined />}
-            </div>
-            <div style={{ background: 'transparent', position: 'relative', zIndex: 1, cursor: 'pointer', display: 'flex', justifyContent: 'center', alignItems: 'center'}} className="border rounded border-black md:ml-20 md:w-3/4 lg:w-4/5 w-4/5 ml-5" onClick={() => setModal2Visible(true)}>
-                <p className="font-semibold pt-3.5 md:mr-32 lg:mr-56 mr-24">Bạn nghĩ gì về phim này?</p>
+        <div className="mx-0 lg:mx-32 mt-10">
+            <div style={{ background: 'transparent', position: 'relative', zIndex: 1, cursor: 'pointer', justifyContent: 'center', alignItems: 'center' }} className="border rounded border-black md:ml-20 md:w-3/4 lg:w-4/5 w-4/5 ml-5 grid grid-cols-1 sm:grid-cols-3" onClick={() => setModal2Visible(true)}>
+                <div className='ml-8 mt-2 mb-2'>
+                    <div style={{ width: 40, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center' }} className="text-2xl rounded-full bg-blue-400 mt-1.5 ml-20 sm:ml-0">{userLogin.taiKhoan ? userLogin.taiKhoan.substr(0, 1).toUpperCase() : <UserOutlined />}
+                    </div>
+                </div>
+                <div className='ml-12 sm:-ml-12 lg:-ml-24 mt-2'>
+                    <span className="font-semibold pt-3.5">Bạn nghĩ gì về phim này ?</span>
+                </div>
+                <div className="ml-16 sm:ml-0 mt-1.5 mb-2 sm:mb-2">
+                    <Rate tooltips={desc} onChange={handleChangeRate} value={`${filmDetail.danhGia / 2}`} />
+                </div>
             </div>
             <Modal
                 title="Đánh giá phim"
@@ -186,7 +190,7 @@ export function DanhGia(props) {
                 onCancel={() => setModal2Visible(false)}
             >
                 <p className="text-green-400 text-5xl font-medium text-center mb-1">{filmDetail.danhGia.toFixed(1)}</p>
-                <Rate style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 30, marginBottom: '20px' }} tooltips={desc} onChange={handleChangeRate} allowHalf value={`${filmDetail.danhGia/2}`} />
+                <Rate style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', fontSize: 30, marginBottom: '20px' }} tooltips={desc} onChange={handleChangeRate} allowHalf value={`${filmDetail.danhGia / 2}`} />
                 <TextArea placeholder="Nói cho mọi người biết bạn nghĩ gì về phim này..." allowClear onChange={onChange} />
             </Modal>
         </div>
