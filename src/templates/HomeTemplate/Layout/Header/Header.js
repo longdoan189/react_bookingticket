@@ -137,7 +137,7 @@ export default function Header(props) {
                                 <NavLink to="/news" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-violet-600 border-violet-600 text-white" activeClassName="border-b-2 border-white">{t('news')}</NavLink>
                             </a>
                         </div>
-                        <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white ml-4">
+                        <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white ml-4">
                             {renderLogin()}
                         </a>
                         <div>
