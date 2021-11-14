@@ -28,7 +28,7 @@ export default function News(props) {
                     {tintuc.map((sample_news, i) =>
                         <div className="xl:w-1/3 md:w-1/2 p-4" key={i}>
                             <div className="bg-white p-6 rounded-lg">
-                                <img style={{ cursor: 'pointer' }} className="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72  rounded w-full object-cover object-center mb-6" src={sample_news.image} onError={(e) => { e.target.onerror = null; e.target.src = "https://picsum.photos/720/400" }} alt="Image Size 720x400" />
+                                <img style={{ cursor: 'pointer' }} className="lg:h-60 xl:h-56 md:h-64 sm:h-72 xs:h-72 h-72  rounded w-full object-cover object-center mb-6" src={sample_news.urlToImage} onError={(e) => { e.target.onerror = null; e.target.src = "https://picsum.photos/720/400" }} alt="Image Size 720x400" />
                                 <h3 className="tracking-widest text-indigo-500 text-xs font-medium title-font">{sample_news.author}</h3>
                                 <h2 className="text-lg text-gray-900 font-medium title-font mb-4">{sample_news.title}</h2>
                                 <p className="leading-relaxed text-base">{sample_news.description}</p>
