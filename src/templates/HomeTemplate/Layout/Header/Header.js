@@ -127,13 +127,13 @@ export default function Header(props) {
                 {(show || start_show) &&
                     <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
                         <div className="text-sm lg:flex-grow font-medium">
-                            <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
+                            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
                                 <NavLink to="/home" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-violet-600 border-violet-600 text-white" activeClassName="border-b-2 border-white">{t('home')}</NavLink>
                             </a>
-                            <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
+                            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white mr-4">
                                 <NavLink to="/contact" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-violet-600 border-violet-600 text-white" activeClassName="border-b-2 border-white">{t('contact')}</NavLink>
                             </a>
-                            <a href="#responsive-header" className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white">
+                            <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-lighter hover:text-white">
                                 <NavLink to="/news" className="flex items-center -mb-0.5 border-b-2 px-4 border-transparent text-violet-600 border-violet-600 text-white" activeClassName="border-b-2 border-white">{t('news')}</NavLink>
                             </a>
                         </div>
