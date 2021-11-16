@@ -1,5 +1,5 @@
 import { Fragment, useEffect } from "react";
-import { Route } from "react-router";
+import { Route } from "react-router-dom";
 
 
 export const UserTemplate = (props) => {
