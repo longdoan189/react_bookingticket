@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const API_KEY = "6e1192c7c733465aaf9d32ed8caec88a"; 
+const API_KEY = "a8095b4662e99bb628d77eb6b78d9bdc"; 
 export class NewsService {
 
     getNews = (topic = "movie", language = "en") => {
         return axios({
-            url: `https://newsapi.org/v2/everything?q=${topic}&language=${language}&pageSize=24&apiKey=${API_KEY}`,
+            url: `https://gnews.io/api/v4/search?q=movie&lang=${language}&token=${API_KEY}`,
             method: 'GET'
         })
     }
