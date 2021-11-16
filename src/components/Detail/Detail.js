@@ -48,8 +48,8 @@ export default function Detail(props) {
                         </div>
                     </div>
                     <div className="col-span-4 ml-12 sm:ml-0">
-                        <h1 style={{ color: 'red', fontWeight: 'bold', fontSize: 15 }} className="sm:ml-20 ml-20">Đánh giá</h1>
-                        <h1 className="text-green-400 text-2xl text-center mr-10 md:mr-3 lg:text-left lg:ml-5"><Rate allowHalf value={filmDetail.danhGia / 2} style={{ color: '#78ed78', fontSize: 30 }} /></h1>
+                        <h1 style={{ color: 'red', fontWeight: 'bold', fontSize: 15 }} className="sm:ml-20 ml-20 mb-5 lg:mb-3">Đánh giá</h1>
+                        <h1 className="text-green-400 text-2xl text-center mr-12 md:mr-3 lg:text-left lg:ml-5 mb-5"><Rate allowHalf value={filmDetail.danhGia / 2} style={{ color: '#78ed78', fontSize: 30 }} /></h1>
                         <div className={`c100 p${filmDetail.danhGia * 10} big`}>
                             <span className='sm:bg-transparent rounded-full font-medium'>{filmDetail.danhGia * 10}%</span>
                             <div className="slice">
